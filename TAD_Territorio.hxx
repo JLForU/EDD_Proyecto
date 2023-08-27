@@ -1,20 +1,21 @@
 
-// Directivas de preprocesamiento.
-#ifndef TAD_TERRITORIO_H
-    #define TAD_TERRITORIO_H
-
+// INICIO DIRECTIVAS DE PREPROCESAMIENTO.
+//// MACROS.
+#ifndef TAD_TERRITORIO_HXX
+#define TAD_TERRITORIO_HXX
+//// INVOCACIÓN DE HERRAMIENTAS ADICIONALES.
 using namespace std ;
 
 
 
-/* Definición de TAD_Territorio. */
+/* DEFINICIÓN DE 'TAD_Territorio'. */
 
 class Territorio {
 
 
     private :
 
-        //// ATRIBUTOS ////
+        //// DATOS ////
         string nombre ;
         string continente ;
         int id ;
@@ -23,6 +24,9 @@ class Territorio {
     public :
 
         //// CONSTRUCTORES ////
+        /* Constructor por defecto. */
+        Territorio ( ) ;
+        /* Constructor esperado. */
         Territorio ( string nuevoNombre , string nuevoContinente , int nuevoID ) ;
         
         //// GETTERS ////
@@ -34,10 +38,11 @@ class Territorio {
         void setContinente ( string nuevoContinente ) ;
         void setID ( int nuevoID ) ;
 
+
 } ;
 
 
 
-// Directiva de preprocesamiento.
-#endif  // TAD_TERRITORIO_H
+// FIN DE DIRECTIVAS DE PREPROCESAMIENTO.
+#endif  // TAD_TERRITORIO_HXX
 

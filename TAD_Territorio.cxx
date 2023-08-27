@@ -1,29 +1,33 @@
 
-// Directivas de preprocesamiento.
-#include <string>
-
-#include "TAD_Territorio.h"
-
+// DIRECTIVAS DE PREPROCESAMIENTO.
+//// LLAMADO DE ARCHIVOS ADICIONALES.
+#include "main.hxx"
 
 
-/* Implementación de funciones para el TAD_Carta. */
+
+/* IMPLEMENTACIÓN DE FUNCIONES PARA 'TAD_Carta'. */
 
 //// CONSTRUCTOR ////
+Territorio::Territorio ( ) {
+    this -> nombre = "" ;
+    this -> continente = "" ;
+    this -> id = 0 ;
+}
 Territorio::Territorio ( string nuevoNombre , string nuevoContinente , int nuevoID ) {
     this -> nombre = nuevoNombre ;
     this -> continente = nuevoContinente ;
     this -> id = nuevoID ;
 }
 
-  //// GETTERS ////
+//// GETTERS ////
 string Territorio::getNombre ( ) {
-  return this -> nombre ;
+    return this -> nombre ;
 }
 string Territorio::getContinente ( ) {
     return this -> continente ;
 }
 int Territorio::getID ( ) {
-  return this -> id ;
+    return this -> id ;
 }
 
 //// SETTERS ////

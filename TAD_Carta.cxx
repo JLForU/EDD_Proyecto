@@ -1,39 +1,39 @@
 
-// Directivas de preprocesamiento.
-#include <string>
-
-#include "TAD_Carta.h"
-
+// DIRECTIVAS DE PREPROCESAMIENTO.
+//// LLAMADO DE ARCHIVOS ADICIONALES.
+#include "main.hxx"
 
 
-/* Implementación de funciones para el TAD_Carta. */
+
+/* IMPLEMENTACIÓN DE FUNCIONES PARA 'TAD_Carta'. */
 
 //// CONSTRUCTORES ////
-Carta::Carta ( string nuevoTerritorio , string nuevoDibujo ) {
+Carta::Carta ( Territorio nuevoTerritorio , Ejercito nuevoEjercito ) {
     this -> territorio = nuevoTerritorio ;
-    this -> dibujo = nuevoDibujo ;
+    this -> ejercito =  nuevoEjercito ;
+    this -> descripcioon = "No hay misión para este tipo de carta." ;
 }
 Carta::Carta ( string nuevaDescripcioon ) {
     this -> descripcioon = nuevaDescripcioon ;
 }
 
 //// GETTERS ////
-string Carta::getTerritorio ( ) {
+Territorio Carta::getTerritorio ( ) {
     return this -> territorio ;
 }
-string Carta::getDibujo ( ) {
-    return this -> dibujo ;
+Ejercito Carta::getEjercito ( ) {
+    return this -> ejercito ;
 }
 string Carta::getDescripcioon ( ) {
     return this -> descripcioon ;
 }
 
 //// SETTERS ////
-void Carta::setTerritorio ( string nuevoTerritorio ) {
+void Carta::setTerritorio ( Territorio nuevoTerritorio ) {
     this -> territorio = nuevoTerritorio ;
 }
-void Carta::setDibujo ( string nuevoDibujo ) {
-    this -> dibujo = nuevoDibujo ;
+void Carta::setEjercito ( Ejercito nuevoEjercito ) {
+    this -> ejercito = nuevoEjercito ;
 }
 void Carta::setDescripcioon ( string nuevaDescripcioon ) {
     this -> descripcioon = nuevaDescripcioon ;

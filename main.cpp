@@ -1,16 +1,17 @@
 
-// Directivas de preprocesamiento.
-#include "main.h"
-#include "TAD_Carta.h"
+// DIRECTIVAS DE PREPROCESAMIENTO.
+#include "main.hxx"
 
 
 
-// Sentencias globales.
+// SENTENCIAS GLOBALES GENERALES.
 string comandoEntrada ;
 bool partidaInicializada = false ;
 bool juegoFinalizado = false ;
 vector<Carta> mazo ;
 
+
+/* IMPLEMENTACIÓN DE LA FUNCIÓN "MAIN". */
 
 int main ( void ) {
 
@@ -22,27 +23,7 @@ int main ( void ) {
 
     llenarMazo() ;
 
-    vector<Carta>::iterator it ;
-    for ( it = mazo.begin() ; it != mazo.end() ; ++it )
-        cout << it -> getTerritorio() << " ; " << it -> getDibujo() << endl ;
-    cout << endl << endl ;
-
-    /*
-    do {
-
-        cout << "\tIntroduce un comando: " << flush ;
-        getline (cin,comandoEntrada) ;
-        
-        cout << endl << endl ;
-        
-	    accionarComandoCorrecto ( verificarComandoExistente(comandoEntrada) ) ;
-            
-        cout << endl << endl ;
-        
-        if ( comandoEntrada == "salir" || comandoEntrada == "SALIR" ) break ;
-        
-    } while ( true ) ;
-    */
+    funcioon_Jugar() ;
 
 
     cout << "\t\t - - - - - - - - -\n" << flush ;
@@ -53,7 +34,3 @@ int main ( void ) {
 return 0 ;
 }
 
-
-
-
-// To rest -->      

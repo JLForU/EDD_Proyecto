@@ -1,29 +1,21 @@
 
-// Directivas de preprocesamiento.
-#ifndef HEADER_H
-    #define HEADER_H
-
-#include <stdlib.h>
-#include <iostream>
-#include <fstream>
-#include <string>
-#include <vector>
-
-#include "TAD_Carta.h"
-
+// INICIO DIRECTIVAS DE PREPROCESAMIENTO.
+//// MACROS.
+#ifndef COMANDOS_H
+#define COMANDOS_H
+//// LLAMADO DE ARCHIVOS ADICIONALES.
+#include "main.hxx"
+//// INVOCACIÓN DE HERRAMIENTAS ADICIONALES.
 using namespace std ;
 
 
 
-// Sentencias globales.
+// SENTENCIAS GLOBALES DE COMANDO.
 extern string comandoEntrada ;
 extern bool partidaInicializada ;
 extern bool juegoFinalizado ;
-extern vector <Carta> mazo ;
 
-// Prototipos de mazo.
-void llenarMazo ( ) ;
-// Prototipos de comando.
+// PROTOTIPOS DE COMANDO.
 string verificarComandoExistente ( string comandoEntrada ) ;
 void accionarComandoCorrecto ( string primerComandoPorVerificar ) ;
 void comandoInicializar ( ) ;
@@ -44,6 +36,6 @@ bool verificarJugador ( int id_jugador ) ;
 
 
 
-// Directivas de preprocesamiento.
-#endif // HEADER_H
+// FIN DE DIRECTIVAS DE PREPROCESAMIENTO.
+#endif // COMANDOS_H
 
