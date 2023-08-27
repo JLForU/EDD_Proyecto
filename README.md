@@ -13,3 +13,15 @@ Repositorio para el proyecto general del curso Estructuras de datos.
 3. ejecutar el archivo ´executable´.
    * Para SOPs Windows: `executable.bat`
    * Para SOPs basados en Unix: `./executable.sh`
+
+
+
+
+
+## Pendiente
+
+* Llenar lista de jugadores;
+
+* por turnos: asociar unidades y territorio a cada jugador; y,
+
+* realizar la lista de territorios vecinos.

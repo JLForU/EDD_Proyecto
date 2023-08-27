@@ -20,10 +20,12 @@ using namespace std ;
 
 
 // SENTENCIAS GLOBALES DE JUEGO.
+extern vector <Territorio> territorios ;
 extern vector <Carta> mazo ;
 
 // PROTOTIPOS DE JUEGO.
 void llenarMazo ( void ) ;
+void llenarJugadores ( void ) ;
 void funcioon_Jugar ( void ) ;
 
 

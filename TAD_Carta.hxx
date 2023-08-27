@@ -28,7 +28,7 @@ class Carta {
 
         //// CONSTRUCTORES ////
         /* Constructor cuando la carta es normal. */
-        Carta ( Territorio , Ejercito ) ;
+        Carta ( Territorio nuevoTerritorio , Ejercito nuevoEjercito ) ;
         /* Constructor cuando la carta es misión. */
         Carta ( string ) ;
         
@@ -37,9 +37,9 @@ class Carta {
         Ejercito getEjercito ( ) ;
         string getDescripcioon ( ) ;
         //// SETTERS ////
-        void setTerritorio ( Territorio ) ;
-        void setEjercito ( Ejercito ) ;
-        void setDescripcioon ( string ) ;
+        void setTerritorio ( Territorio nuevoTerritorio ) ;
+        void setEjercito ( Ejercito nuevoEjercito ) ;
+        void setDescripcioon ( string nuevaDescripcioon ) ;
 
 
 } ;

@@ -8,7 +8,8 @@
 string comandoEntrada ;
 bool partidaInicializada = false ;
 bool juegoFinalizado = false ;
-vector<Carta> mazo ;
+vector <Carta> mazo ;
+vector <Territorio> territorios ;
 
 
 /* IMPLEMENTACIÓN DE LA FUNCIÓN "MAIN". */
@@ -22,6 +23,13 @@ int main ( void ) {
 
 
     llenarMazo() ;
+
+    /*
+    vector<Carta>::iterator it ;
+    for ( it = mazo.begin() ; it != mazo.end() ; ++it )
+        cout << it -> getTerritorio().getNombre() << " ; " << endl ;
+    cout << endl << endl ;
+    */
 
     funcioon_Jugar() ;
 
