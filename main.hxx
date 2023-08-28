@@ -14,6 +14,7 @@
 #include "TAD_Carta.hxx"
 #include "TAD_Territorio.hxx"
 #include "TAD_Ejercito.hxx"
+#include "TAD_Jugador.hxx"
 //// INVOCACIÓN DE HERRAMIENTAS.
 using namespace std ;
 

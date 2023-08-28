@@ -28,8 +28,6 @@ class Jugador {
     public :
 
         //// CONSTRUCTORES ////
-        /* Constructor por defecto. */
-        Jugador ( void ) ;
         /* Constructor ideal. */
         Jugador ( string nuevoNombre ) ;
 

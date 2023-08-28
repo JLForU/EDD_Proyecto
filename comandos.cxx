@@ -183,7 +183,7 @@ void accionarComandoCorrecto ( string primerComando ) {
 
 
 void comandoInicializar ( void ) {
-	int nJugadores;
+int nJugadores;
 
     if ( partidaInicializada ) {
     
