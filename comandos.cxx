@@ -183,6 +183,7 @@ void accionarComandoCorrecto ( string primerComando ) {
 
 
 void comandoInicializar ( void ) {
+	int nJugadores;
 
     if ( partidaInicializada ) {
     
@@ -191,9 +192,21 @@ void comandoInicializar ( void ) {
     } else {
 
         partidaInicializada = true ;
-        
+		Territorio t;
+        for(int i =0;i<5;i++)
+		{
+			cout<< Territorio(i);
+		}
+		
         cout << "El juego se ha inicializado correctamente." << endl ;
-
+		cout<<"Cuantos jugadores van a jugar (3/4/5/6):";
+		cin>>nJugadores;
+		switch(nJugadores){
+			case 3:
+			cout<<"Cantidad de jugadores invalida.";
+			
+		}
+		
     }
 
 }
