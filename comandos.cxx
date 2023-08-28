@@ -189,7 +189,6 @@ void accionarComandoCorrecto ( string primerComando ) {
 
 
 void comandoInicializar ( void ) {
-	
 
     if ( partidaInicializada ) {
     
