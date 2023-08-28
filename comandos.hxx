@@ -14,6 +14,7 @@ using namespace std ;
 extern string comandoEntrada ;
 extern bool partidaInicializada ;
 extern bool juegoFinalizado ;
+extern int nJugadores;
 
 // PROTOTIPOS DE COMANDO.
 string verificarComandoExistente ( string comandoEntrada ) ;

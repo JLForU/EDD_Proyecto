@@ -12,6 +12,7 @@ vector <Carta> mazo ;
 vector <Territorio> territorios ;
 
 
+
 /* IMPLEMENTACIÓN DE LA FUNCIÓN "MAIN". */
 
 int main ( void ) {

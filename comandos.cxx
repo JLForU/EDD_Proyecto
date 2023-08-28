@@ -1,6 +1,12 @@
 
 // DIRECTIVAS DE PREPROCESAMIENTO.
 #include "comandos.hxx"
+#include "TAD_Jugador.hxx"
+
+
+//Variable global
+vector<Jugador>jugadores;
+int nJugadores;
 
 
 
@@ -183,7 +189,7 @@ void accionarComandoCorrecto ( string primerComando ) {
 
 
 void comandoInicializar ( void ) {
-	int nJugadores;
+	
 
     if ( partidaInicializada ) {
     
@@ -191,20 +197,27 @@ void comandoInicializar ( void ) {
     
     } else {
 
-        partidaInicializada = true ;
-		Territorio t;
-        for(int i =0;i<5;i++)
-		{
-			cout<< Territorio(i);
-		}
-		
+        partidaInicializada = true ;		
         cout << "El juego se ha inicializado correctamente." << endl ;
-		cout<<"Cuantos jugadores van a jugar (3/4/5/6):";
-		cin>>nJugadores;
-		switch(nJugadores){
-			case 3:
-			cout<<"Cantidad de jugadores invalida.";
-			
+		while(nJugadores<3||nJugadores>6){
+			cout<<"Cuantos jugadores van a jugar (3/4/5/6):";
+			cin>>nJugadores;
+			if(nJugadores<3||nJugadores>6){
+				cout<<"Cantidad de jugadores invalida."<<endl;
+			}
+			else
+			{
+				cout<<"Cantidad de jugadores valida."<<endl;
+			}
+		}
+		for(int i=0;i<nJugadores;i++)
+		{	
+			string nombreJugador;
+			 cout<<"Digite el nombre o identificador del jugador "<<i+1;
+			 cin>>nombreJugador;
+			 Jugador nuevoJugador=Jugador(nombreJugador);
+			 jugadores.push_back(nuevoJugador);		
+			 
 		}
 		
     }
