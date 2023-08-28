@@ -181,7 +181,7 @@ void accionarComandoCorrecto ( string primerComando ) {
 
     } else {
 
-        cout << "Comando no identificado.\n" << flush ;
+        cout << "Comando no identificado 2.\n" << flush ;
 
     }
     
@@ -197,26 +197,63 @@ void comandoInicializar ( void ) {
     } else {
 
         partidaInicializada = true ;		
-        cout << "El juego se ha inicializado correctamente." << endl ;
+        cout << "El juego se ha inicializado correctamente.\n" << flush ;
 		while(nJugadores<3||nJugadores>6){
-			cout<<"Cuantos jugadores van a jugar (3/4/5/6):";
+			cout<<"Cuantos jugadores van a jugar (3/4/5/6): "<<flush;
 			cin>>nJugadores;
 			if(nJugadores<3||nJugadores>6){
-				cout<<"Cantidad de jugadores invalida."<<endl;
+				cout<<"Cantidad de jugadores invalida.\n"<<flush;
 			}
 			else
 			{
-				cout<<"Cantidad de jugadores valida."<<endl;
+				cout<<"Cantidad de jugadores valida.\n"<<flush;
 			}
 		}
 		for(int i=0;i<nJugadores;i++)
 		{	
 			string nombreJugador;
-			 cout<<"Digite el nombre o identificador del jugador "<<i+1;
+			 cout<<"Digite el nombre o identificador del jugador "<<i+1<<": "<<flush;
 			 cin>>nombreJugador;
 			 Jugador nuevoJugador=Jugador(nombreJugador);
 			 jugadores.push_back(nuevoJugador);		
 			 
+		}
+		string color;
+		string vcolor[nJugadores];
+		bool ci;
+		switch(nJugadores){
+			case 3:
+				cout<<"Se le han asignado 35 infanterias a cada jugador\n"<<flush;
+				cout<<"1.Gris"<<"\t"<<"2.Amarillo"<<"\n"<<"3.Rojo"<<"\t"<<"4.Negro"<<"\n"<<"5.Verde"<<"\t"<<"6.Azul"<<"\n"<<flush;
+				for(int i=0;i<nJugadores;i++){
+					ci=true;
+					while(ci){
+						
+						cout<<"Defina el color con el cual se quiere identificar"<<"\n"<<"$ "<<flush;
+						cin>>color;
+						if(ci=true){
+							/////////////////verificar que el color no se repita////////////////////
+						}
+						else if (color != "Gris" && color != "gris" && color != "Amarillo" && color != "amarillo"&& color != "Rojo" && color != "rojo" && color != "Negro" && color != "negro"&& color != "Verde" && color != "verde" && color != "Azul" && color != "azul") {
+							cout << "Color incorrecto" << endl;
+						}
+						else{
+						ci=false;
+						}
+					}
+					Ejercito anadirEjercito=Ejercito("Infanteria",color,35);
+					jugadores[i].agregarTropa(anadirEjercito);
+				}
+				break;
+			case 4:
+				cout<<"Se le han asignado 30 infanterias a cada jugador";
+				break;
+			case 5:
+				cout<<"Se le han asignado 25 infanterias a cada jugador";
+				break;
+			case 6:
+				cout<<"Se le han asignado 20 infanterias a cada jugador";
+				break;
 		}
 		
     }

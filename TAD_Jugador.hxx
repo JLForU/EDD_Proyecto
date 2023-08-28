@@ -20,7 +20,7 @@ class Jugador {
         string nombre ;
         /* Datos para construir mapa de jugador. */
         vector <Territorio> territorios ;
-        vector <int> unidades ;
+        vector <Ejercito> tropas ;
         /* Dato para manejar mazo. */
         vector <Carta> cartas ;
 
@@ -37,7 +37,7 @@ class Jugador {
         void setNombre ( string nuevoNombre ) ;
 
         //// COMPORTAMIENTOS ////
-        void obtenerUnidades ( int nuevasUnidades , Territorio nuevoTerritorio ) ;
+		void agregarTropa(Ejercito nuevaTropa);
 
 
 } ;

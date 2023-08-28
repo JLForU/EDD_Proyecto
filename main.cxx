@@ -108,7 +108,7 @@ void funcioon_Jugar ( void ) {
 
     do {
 
-        cout << "\tIntroduce un comando: " << flush ;
+        cout << "\tIntroduce un comando: " <<endl<<"$ "<<flush ;
         getline (cin,comandoEntrada) ;
 
         cout << endl << endl ;

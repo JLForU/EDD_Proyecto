@@ -22,3 +22,7 @@ void Jugador::setNombre ( string nuevoNombre ) {
     this -> nombre = nuevoNombre ;
 }
 
+void Jugador::agregarTropa( Ejercito nuevaTropa){
+	this -> tropas.push_back(nuevaTropa);
+}
+
