@@ -1,8 +1,6 @@
 
-#include <algorithm>
 // DIRECTIVAS DE PREPROCESAMIENTO.
 #include "comandos.hxx"
-#include "TAD_Jugador.hxx"
 
 
 //Variable global
@@ -248,7 +246,7 @@ void comandoInicializar ( void ) {
 						cout<<"Defina el color con el cual se quiere identificar el jugador "<<i+1<<"\n"<<"$ "<<flush;
 						cin>>color[i];
 						bool colorRepetido=false;
-						transform(color[i].begin(), color[i].end(), color[i].begin(), ::tolower);
+						// transform(color[i].begin(), color[i].end(), color[i].begin(), ::tolower);
 						for(int j=0;j<i;j++)
 						{
 							if(color[j]==color[i])

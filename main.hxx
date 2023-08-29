@@ -9,7 +9,6 @@
 #include <string>
 #include <vector>
 #include <stdlib.h>
-#include <map>
 //// LLAMADO DE ARCHIVOS ADICIONALES.
 #include "comandos.hxx"
 #include "TAD_Carta.hxx"

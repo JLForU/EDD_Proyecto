@@ -31,7 +31,7 @@ bool verificarTerritorio ( ) ;
 void comandoCostoConquista ( ) ;
 void comandoConquista ( ) ;
 void comandoAyuda ( ) ;
-void comandoAyudaComando (string primerComandoPorVerificar ) ;
+void comandoAyudaComando ( string primerComandoPorVerificar ) ;
 bool verificarTurno ( int id_jugador ) ;
 bool verificarJugador ( int id_jugador ) ;
 
