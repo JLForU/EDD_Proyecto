@@ -1,4 +1,3 @@
-
 // DIRECTIVAS DE PREPROCESAMIENTO.
 //// LLAMADO DE ARCHIVOS ADICIONALES.
 #include "main.hxx"
@@ -40,4 +39,9 @@ void Territorio::setContinente ( string nuevoContinente ) {
 void Territorio::setID ( int nuevoID ) {
     this -> id = nuevoID ;
 }
-
+vector<Territorio*> getVecinos() {
+        return vecinos;
+    }
+void agregarVecino(Territorio* vecino) {
+        vecinos.push_back(vecino);
+    }
