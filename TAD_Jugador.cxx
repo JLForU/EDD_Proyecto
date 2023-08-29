@@ -16,7 +16,10 @@ Jugador::Jugador ( string nuevoNombre ) {
 string Jugador::getNombre ( void ) {
     return this -> nombre ;
 }
-
+vector<Territorio> Jugador::getTerritorios(void)
+{
+	return this-> territorios;
+}
 //// SETTERS ////
 void Jugador::setNombre ( string nuevoNombre ) {
     this -> nombre = nuevoNombre ;
@@ -28,4 +31,13 @@ void Jugador::agregarTropa( Ejercito nuevaTropa){
 void Jugador::asignarTerritorio( Territorio nuevoTerritorio){
 	this -> territorios.push_back(nuevoTerritorio);
 }
-
+/*Territorio Jugador::obtenerTerritorio(string nombreTerritorio){
+	vector<Territorio>::iterator it;
+	for(it=this->territorios.begin();it<this->territorios.end();++it)
+	{
+		if(*(it).getNombre()==nombreTerritorio)
+		{
+			return *it;
+		}
+	}
+}*/

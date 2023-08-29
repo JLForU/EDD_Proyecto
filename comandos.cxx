@@ -258,7 +258,6 @@ void comandoInicializar ( void ) {
 							}
 						}
 						if(!colorRepetido){
-							/////////////////verificar que el color no se repita////////////////////
 							if (color[i] != "Gris" && color[i] != "gris" && color[i] != "Amarillo" && color[i] != "amarillo"&& color[i] != "Rojo" && color[i] != "rojo" && color[i] != "Negro" && color[i] != "negro"&& color[i] != "Verde" && color[i] != "verde" && color[i] != "Azul" && color[i] != "azul") {
 								cout << "Color incorrecto" << endl;
 							}
@@ -276,6 +275,7 @@ void comandoInicializar ( void ) {
 				}
 				int turnoActual = 0;
 				bool vTerritorio;
+				bool TDisponible;
 				string continente;
 				string territorioElegido;
 				int id;
@@ -286,8 +286,13 @@ void comandoInicializar ( void ) {
 						if(territorios[i].getContinente()!=territorios[i-1].getContinente())
 						{
 							cout<<endl<<"\t"<<territorios[i].getContinente()<<endl;
-						}						
-						cout<<"\t"<<territorios[i].getID()<<"\t"<<territorios[i].getNombre()<<endl;
+						}
+						for(int h=0;h<jugadores.size();h++){
+							if(territorios[i].getNombre()!=jugadores[h].getTerritorios().getNombre())
+							{
+								cout<<"\t"<<territorios[i].getID()<<"\t"<<territorios[i].getNombre()<<endl;
+							}
+						}
 					}
 					Jugador& jugadorActual = jugadores[turnoActual];
 					vTerritorio=false;
@@ -295,17 +300,24 @@ void comandoInicializar ( void ) {
 					{
 						cout << "Turno de " << jugadorActual.getNombre() << ". Elija un territorio: ";
 						cin >> territorioElegido;
-						for (int k=0;k<territorios.size();k++)
+						for(int l=0;l<jugadores.size();l++)
 						{
+							for (int k=0;k<territorios.size();k++)
+						{
+							if(jugadores[l].getTerritorios().getNombre()==territorioElegido)
+							{
+								cout<<"Este territorio se encuentra ocupado"<<endl;
+							}
 							if(territorios[k].getNombre()==territorioElegido)
 							{
 								vTerritorio=true;
 								continente=territorios[k].getContinente();
 								id=territorios[k].getID();
 								break;
-								
+								////////////verificar que no esta en uso/////////////////
 							}
 							
+						}
 						}
 						if(vTerritorio==false){
 							cout<<"Este territorio no existe"<<endl;
