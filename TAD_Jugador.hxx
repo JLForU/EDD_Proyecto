@@ -38,6 +38,7 @@ class Jugador {
 
         //// COMPORTAMIENTOS ////
 		void agregarTropa(Ejercito nuevaTropa);
+		void asignarTerritorio(Territorio nuevoTerritorio);
 
 
 } ;

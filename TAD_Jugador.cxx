@@ -25,4 +25,7 @@ void Jugador::setNombre ( string nuevoNombre ) {
 void Jugador::agregarTropa( Ejercito nuevaTropa){
 	this -> tropas.push_back(nuevaTropa);
 }
+void Jugador::asignarTerritorio( Territorio nuevoTerritorio){
+	this -> territorios.push_back(nuevoTerritorio);
+}
 

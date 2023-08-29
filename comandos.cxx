@@ -1,4 +1,4 @@
-
+#include <algorithm>
 // DIRECTIVAS DE PREPROCESAMIENTO.
 #include "comandos.hxx"
 #include "TAD_Jugador.hxx"
@@ -218,43 +218,103 @@ void comandoInicializar ( void ) {
 			 jugadores.push_back(nuevoJugador);		
 			 
 		}
-		string color;
-		string vcolor[nJugadores];
+		string color[nJugadores];
 		bool ci;
+		int tropas;
 		switch(nJugadores){
 			case 3:
 				cout<<"Se le han asignado 35 infanterias a cada jugador\n"<<flush;
-				cout<<"1.Gris"<<"\t"<<"2.Amarillo"<<"\n"<<"3.Rojo"<<"\t"<<"4.Negro"<<"\n"<<"5.Verde"<<"\t"<<"6.Azul"<<"\n"<<flush;
+				tropas=35;
+				break;
+			case 4:
+				cout<<"Se le han asignado 30 infanterias a cada jugador";
+				tropas=30;
+				break;
+			case 5:
+				cout<<"Se le han asignado 25 infanterias a cada jugador";
+				tropas=25;
+				break;
+			case 6:
+				cout<<"Se le han asignado 20 infanterias a cada jugador";
+				tropas=20;
+				break;
+		}
+		cout<<"\n\t1.Gris"<<"\t"<<"\t2.Amarillo"<<"\n"<<"\t3.Rojo"<<"\t"<<"\t4.Negro"<<"\n"<<"\t5.Verde"<<"\t"<<"\t6.Azul"<<"\n"<<flush;
 				for(int i=0;i<nJugadores;i++){
 					ci=true;
 					while(ci){
 						
-						cout<<"Defina el color con el cual se quiere identificar"<<"\n"<<"$ "<<flush;
-						cin>>color;
-						if(ci=true){
+						cout<<"Defina el color con el cual se quiere identificar el jugador "<<i+1<<"\n"<<"$ "<<flush;
+						cin>>color[i];
+						bool colorRepetido=false;
+						transform(color[i].begin(), color[i].end(), color[i].begin(), ::tolower);
+						for(int j=0;j<i;j++)
+						{
+							if(color[j]==color[i])
+							{
+								cout<<"Este color ya se encuentra en uso.\n"<<flush;
+								colorRepetido=true;
+								break;
+							}
+						}
+						if(!colorRepetido){
 							/////////////////verificar que el color no se repita////////////////////
+							if (color[i] != "Gris" && color[i] != "gris" && color[i] != "Amarillo" && color[i] != "amarillo"&& color[i] != "Rojo" && color[i] != "rojo" && color[i] != "Negro" && color[i] != "negro"&& color[i] != "Verde" && color[i] != "verde" && color[i] != "Azul" && color[i] != "azul") {
+								cout << "Color incorrecto" << endl;
+							}
+							else
+							{
+								ci=false;
+								cout<<"Color "<<color[i]<<" guardado con exito para el usuario "<<i+1<<"\n"<<flush;
+							}
 						}
-						else if (color != "Gris" && color != "gris" && color != "Amarillo" && color != "amarillo"&& color != "Rojo" && color != "rojo" && color != "Negro" && color != "negro"&& color != "Verde" && color != "verde" && color != "Azul" && color != "azul") {
-							cout << "Color incorrecto" << endl;
+						
+					}
+					Ejercito anadirEjercito=Ejercito("Infanteria",color[i],tropas);
+					jugadores[i].agregarTropa(anadirEjercito);
+					
+				}
+				int turnoActual = 0;
+				bool vTerritorio;
+				string continente;
+				string territorioElegido;
+				int id;
+				cout<<endl<<"\t"<<"A continuacion cada jugador deberá escoger un territorio (ingresar nombre con la primera mayuscula);"<<endl;
+				for(int j=0;j<territorios.size();j++)
+				{	for (int i=0;i<territorios.size()+1;i++)
+					{
+						if(territorios[i].getContinente()!=territorios[i-1].getContinente())
+						{
+							cout<<endl<<"\t"<<territorios[i].getContinente()<<endl;
+						}						
+						cout<<"\t"<<territorios[i].getID()<<"\t"<<territorios[i].getNombre()<<endl;
+					}
+					Jugador& jugadorActual = jugadores[turnoActual];
+					vTerritorio=false;
+					while(vTerritorio==false)
+					{
+						cout << "Turno de " << jugadorActual.getNombre() << ". Elija un territorio: ";
+						cin >> territorioElegido;
+						for (int k=0;k<territorios.size();k++)
+						{
+							if(territorios[k].getNombre()==territorioElegido)
+							{
+								vTerritorio=true;
+								continente=territorios[k].getContinente();
+								id=territorios[k].getID();
+								break;
+								
+							}
+							
 						}
-						else{
-						ci=false;
+						if(vTerritorio==false){
+							cout<<"Este territorio no existe"<<endl;
 						}
 					}
-					Ejercito anadirEjercito=Ejercito("Infanteria",color,35);
-					jugadores[i].agregarTropa(anadirEjercito);
+					Territorio elegirTerritorio= Territorio(territorioElegido, continente,id);
+					jugadores[turnoActual].asignarTerritorio(elegirTerritorio);
+					turnoActual = (turnoActual + 1) % jugadores.size();
 				}
-				break;
-			case 4:
-				cout<<"Se le han asignado 30 infanterias a cada jugador";
-				break;
-			case 5:
-				cout<<"Se le han asignado 25 infanterias a cada jugador";
-				break;
-			case 6:
-				cout<<"Se le han asignado 20 infanterias a cada jugador";
-				break;
-		}
 		
     }
 
