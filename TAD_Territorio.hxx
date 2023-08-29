@@ -19,6 +19,7 @@ class Territorio {
         string nombre ;
         string continente ;
         int id ;
+        vector <Territorio> vecinos ;
 
     public :
 
@@ -32,10 +33,14 @@ class Territorio {
         string getNombre ( void ) ;
         string getContinente ( void ) ;
         int getID ( void ) ;
+        vector <Territorio> getVecinos ( void ) ;
         //// SETTERS ////
         void setNombre ( string nuevoNombre ) ;
         void setContinente ( string nuevoContinente ) ;
         void setID ( int nuevoID ) ;
+
+        //// COMPORTAMIENTOS ////
+        void aniadirVecino ( Territorio nuevoVecino ) ;
 
 
 } ;

@@ -25,10 +25,13 @@ int main ( void ) {
 
     llenarMazo() ;
 
+    crearMapa() ;
+
     /*
-    vector<Carta>::iterator it ;
-    for ( it = mazo.begin() ; it != mazo.end() ; ++it )
-        cout << it -> getTerritorio().getNombre() << " ; " << endl ;
+    vector <Territorio>::iterator it_01 ;
+    for ( it_01 = territorios.begin() ; it_01 < territorios.end() ; ++it_01 )
+        for ( int contador_i=0 ; contador_i < it_01->getVecinos().size() ; contador_i++ )
+            cout << it_01->getNombre() << " : " << it_01->getVecinos()[contador_i].getNombre() << endl ;
     cout << endl << endl ;
     */
 

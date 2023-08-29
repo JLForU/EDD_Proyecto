@@ -33,6 +33,7 @@ void llenarMazo ( void ) ;
 void llenarJugadores ( void ) ;
 void funcioon_Jugar ( void ) ;
 void crearMapa ( void ) ;
+void auxiliar_CrearMapa ( string territorioPrincipal , string territorioVecino ) ;
 
 
 

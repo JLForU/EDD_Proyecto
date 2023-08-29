@@ -29,6 +29,9 @@ string Territorio::getContinente ( ) {
 int Territorio::getID ( ) {
     return this -> id ;
 }
+vector <Territorio> Territorio::getVecinos ( void ) {
+    return this -> vecinos ;
+}
 
 //// SETTERS ////
 void Territorio::setNombre ( string nuevoNombre ) {
@@ -39,5 +42,10 @@ void Territorio::setContinente ( string nuevoContinente ) {
 }
 void Territorio::setID ( int nuevoID ) {
     this -> id = nuevoID ;
+}
+
+//// COMPORTAMIENTOS ////
+void Territorio::aniadirVecino ( Territorio nuevoVecino ) {
+    this -> vecinos . push_back ( nuevoVecino ) ;
 }
 
