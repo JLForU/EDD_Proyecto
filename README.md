@@ -58,8 +58,6 @@ Repositorio para el proyecto general del curso Estructuras de datos.
 
 # Pendiente
 
-* Llenar lista de jugadores;
+* Validar identificación de jugador en comando *turno*; y,
 
-* por turnos: asociar unidades y territorio a cada jugador; y,
-
-* realizar la lista de territorios vecinos.
+* desarrollar toda la lógica del comando *turno*.

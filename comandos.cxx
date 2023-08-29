@@ -182,7 +182,7 @@ void accionarComandoCorrecto ( string primerComando ) {
 
     } else {
 
-        cout << "Comando no identificado 2.\n" << flush ;
+        cout << "Comando no identificado.\n" << flush ;
 
     }
     
