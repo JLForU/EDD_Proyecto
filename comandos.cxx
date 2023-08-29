@@ -742,49 +742,7 @@ void fortificarPosicion(Jugador& jugador) {
     cout << "Se han fortificado " << cantidadUnidades << " unidades desde " << territorioOrigen.getNombre()
          << " a " << territorioDestino.getNombre() << ".\n";
 }
-void atacarTerritorio(Jugador& jugadorAtacante, Territorio& territorioAtacante, Territorio& territorioDefensor) {
-    // Mostrar información del ataque
-    cout << "Ataque desde " << territorioAtacante.getNombre() << " hacia " << territorioDefensor.getNombre() << ".\n";
 
-    // Lanzar dados
-    int dadosAtacante = min(3, territorioAtacante.getUnidades() - 1);
-    int dadosDefensor = min(2, territorioDefensor.getUnidades());
-
-    vector<int> resultadosAtacante(dadosAtacante);
-    vector<int> resultadosDefensor(dadosDefensor);
-
-    for (int i = 0; i < dadosAtacante; ++i) {
-        resultadosAtacante[i] = lanzarDado();
-    }
-
-    for (int i = 0; i < dadosDefensor; ++i) {
-        resultadosDefensor[i] = lanzarDado();
-    }
-
-    // Ordenar resultados de mayor a menor
-    sort(resultadosAtacante.begin(), resultadosAtacante.end(), greater<int>());
-    sort(resultadosDefensor.begin(), resultadosDefensor.end(), greater<int>());
-
-    // Calcular pérdidas de unidades
-    int perdidasAtacante = 0;
-    int perdidasDefensor = 0;
-
-    for (size_t i = 0; i < min(dadosDefensor, dadosAtacante); ++i) {
-        if (resultadosAtacante[i] > resultadosDefensor[i]) {
-            perdidasDefensor++;
-        } else {
-            perdidasAtacante++;
-        }
-    }
-
-    // Aplicar pérdidas de unidades
-    territorioAtacante.restarUnidades(perdidasAtacante);
-    territorioDefensor.restarUnidades(perdidasDefensor);
-
-    cout << "Resultado del ataque:\n";
-    cout << "Atacante perdió " << perdidasAtacante << " unidades.\n";
-    cout << "Defensor perdió " << perdidasDefensor << " unidades.\n";
-}
 void atacarTerritorio(Jugador& atacante, Territorio& territorioAtacante, Territorio& territorioDefensor) {
     // Definir la cantidad de dados para el ataque y la defensa
     int dadosAtaque = min(3, territorioAtacante.getNumUnidades() - 1);
