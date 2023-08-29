@@ -34,7 +34,10 @@ void comandoAyuda ( ) ;
 void comandoAyudaComando ( string primerComandoPorVerificar ) ;
 bool verificarTurno ( int id_jugador ) ;
 bool verificarJugador ( int id_jugador ) ;
-
+void comandoTurno(int idJugador, vector<Jugador>& jugadores);
+int calcularUnidadesPorContinentes(const Jugador& jugador);
+void fortificarPosicion(Jugador& jugador);
+void atacarTerritorio(Jugador& jugadorAtacante, Territorio& territorioAtacante, Territorio& territorioDefensor);
 
 
 // FIN DE DIRECTIVAS DE PREPROCESAMIENTO.
