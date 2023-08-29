@@ -366,37 +366,6 @@ bool verificarTurno ( int id_jugador ) {
 }
 
 
-void comandoTurno ( int id_jugador ) {
-
-    if (partidaInicializada) {
-    
-        if (!juegoFinalizado) {
-        
-            if (verificarJugador(id_jugador)) {
-            
-                if (verificarTurno(id_jugador)) {
-                    cout << "El turno del jugador " << id_jugador << " ha terminado.\n" << flush;
-                } else {
-                    cout << "No es el turno del jugador " << id_jugador << ".\n" << flush;
-                }
-            
-            } else {
-                cout << "\nEl jugador " << id_jugador << " no forma parte de esta partida.\n" << flush;
-            }
-        
-        } else {
-        
-            cout << "\nEsta partida ya tuvo un ganador.\n" << flush;
-        
-        }
-    
-    } else {
-    
-        cout << "Esta partida no ha sido inicializada correctamente.\n" << flush;
-    
-    }
-
-}
 
 
 void comandoSalir ( void ) {
@@ -559,4 +528,312 @@ void comandoAyudaComando ( string comandoAC ) {
     }
 
 }
+void comandoTurno(int idJugador, vector<Jugador>& jugadores) {
+    static int turnoActual = 0;
+    
+    if (partidaInicializada) {
+        if (!juegoFinalizado) {
+            int jugadorIndex = -1;
+
+            // Buscar al jugador por su ID y obtener su índice en el vector
+            for (size_t i = 0; i < jugadores.size(); ++i) {
+                if (jugadores[i].getId() == idJugador) {
+                    jugadorIndex = static_cast<int>(i);
+                    break;
+                }
+            }
+
+            if (jugadorIndex != -1) {
+                if (verificarJugador(idJugador) && verificarTurno(idJugador)) {
+	            Jugador& jugadorActual = jugadores[turnoActual];
+                    int nuevasUnidades = 0;
+
+                    // Obtener nuevas unidades basadas en territorios ocupados
+                    int territoriosOcupados = jugadores[jugadorIndex].getTerritoriosOcupados();
+                    nuevasUnidades += static_cast<int>(territoriosOcupados / 3);
+
+                    // Obtener nuevas unidades basadas en control de continentes
+                    nuevasUnidades += calcularUnidadesPorContinentes(jugadores[jugadorIndex]);
+
+                    // Mostrar la cantidad total de nuevas unidades disponibles
+                    cout << "El jugador " << jugadores[jugadorIndex].getNombre() << " obtiene " << nuevasUnidades << " nuevas unidades.\n";
+
+                    // Asignar las nuevas unidades a los territorios
+                    asignarNuevasUnidades(jugadores[jugadorIndex], nuevasUnidades);
+			
+			// Realizar la fortificación
+			fortificarPosicion(jugadorActual);
+			 
+				// Mostrar territorios disponibles para atacar
+                    cout << "Territorios disponibles para atacar:\n";
+                    for (size_t i = 0; i < jugadorActual.getTerritorios().size(); ++i) {
+                        cout << i << ". " << jugadorActual.getTerritorios()[i].getNombre() << "\n";
+                    }
+
+                    // Seleccionar territorio atacante
+                    int indiceAtacante = seleccionarTerritorioAtacante(jugadorActual);
+                    Territorio& territorioAtacante = jugadorActual.getTerritorios()[indiceAtacante];
+
+                    // Seleccionar territorio defensor
+                    int indiceDefensor = seleccionarTerritorioDefensor(territorioAtacante);
+                    Territorio& territorioDefensor = *territorioAtacante.getTerritoriosVecinos()[indiceDefensor];
+
+                    // Realizar el ataque
+                    atacarTerritorio(jugadorActual, territorioAtacante, territorioDefensor);
+
+                    // Mostrar mensaje de finalización del turno
+                    cout << "El turno del jugador " << idJugador << " ha terminado.\n" << flush;
+
+                    // Actualizar turno actual
+                    turnoActual = (turnoActual + 1) % jugadores.size();
+                } else {
+                    cout << "No es el turno del jugador " << idJugador << " o el jugador no es válido.\n";
+                }
+            } else {
+                cout << "El jugador con ID " << idJugador << " no forma parte de esta partida.\n";
+            }
+        } else {
+            cout << "Esta partida ya tuvo un ganador.\n";
+        }
+    } else {
+        cout << "Esta partida no ha sido inicializada correctamente.\n";
+    }
+}
+
+int calcularUnidadesPorContinentes(const Jugador& jugador) {
+    int unidadesExtras = 0;
+
+    // Obtener la lista de territorios ocupados por el jugador
+    const vector<Territorio>& territoriosOcupados = jugador.getTerritorios();
+    
+    // Contar la cantidad de territorios que el jugador tiene en cada continente
+    map<string, int> territoriosPorContinente;
+    for (const Territorio& territorio : territoriosOcupados) {
+        string continente = territorio.getContinente(); 
+        territoriosPorContinente[continente]++;
+    }
+    
+    // Verificar si el jugador tiene control completo de algún continente y asignar unidades
+    for (const auto& entry : territoriosPorContinente) {
+        string continente = entry.first;
+        int territoriosControlados = entry.second;
+        
+        if (continente == "AmericaDelSur" && territoriosControlados == 4) {
+            unidadesExtras += 2;
+        } else if (continente == "Australia" && territoriosControlados == 2) {
+            unidadesExtras += 2;
+        } else if (continente == "Africa" && territoriosControlados == 6) {
+            unidadesExtras += 3;
+        } else if (continente == "AmericaDelNorte" && territoriosControlados == 9) {
+            unidadesExtras += 5;
+        } else if (continente == "Europa" && territoriosControlados == 7) {
+            unidadesExtras += 5;
+        } else if (continente == "Asia" && territoriosControlados == 7) {
+            unidadesExtras += 7;
+        }
+    }
+    
+    return unidadesExtras;
+}
+
+void asignarNuevasUnidades(Jugador& jugador, int nuevasUnidades) {
+    // Obtener la lista de territorios del jugador
+    vector<Territorio>& territorios = jugador.getTerritorios();
+
+    // Si el jugador no tiene territorios, no se pueden asignar unidades
+    if (territorios.empty()) {
+        cout << "El jugador no tiene territorios para asignar unidades.\n";
+        return;
+    }
+
+    cout << "El jugador " << jugador.getNombre() << " puede reclamar " << nuevasUnidades << " unidades adicionales.\n";
+
+    // Asignar unidades a los territorios
+    for (Territorio& territorio : territorios) {
+        if (nuevasUnidades <= 0) {
+            break;
+        }
+
+        int unidadesAsignar = 0;
+        cout << "Cuántas unidades desea asignar al territorio " << territorio.getNombre() << "? ";
+        cin >> unidadesAsignar;
+
+        if (unidadesAsignar > 0 && unidadesAsignar <= nuevasUnidades) {
+            territorio.agregarUnidades(unidadesAsignar);
+            nuevasUnidades -= unidadesAsignar;
+            cout << "Se han asignado " << unidadesAsignar << " unidades al territorio " << territorio.getNombre() << ".\n";
+        } else {
+            cout << "Cantidad inválida de unidades.\n";
+        }
+    }
+}
+
+void fortificarPosicion(Jugador& jugador) {
+    // Obtener territorios del jugador
+    vector<Territorio>& territorios = jugador.getTerritorios();
+
+    if (territorios.empty()) {
+        cout << "El jugador no tiene territorios para fortificar.\n";
+        return;
+    }
+
+    // Mostrar los territorios del jugador
+    cout << "Territorios del jugador " << jugador.getNombre() << ":\n";
+    for (size_t i = 0; i < territorios.size(); ++i) {
+        cout << i + 1 << ". " << territorios[i].getNombre() << endl;
+    }
+
+    // Seleccionar el territorio origen
+    int indiceOrigen = -1;
+    while (indiceOrigen < 0 || indiceOrigen >= static_cast<int>(territorios.size())) {
+        cout << "Selecciona el número de territorio de origen: ";
+        cin >> indiceOrigen;
+
+        if (indiceOrigen < 0 || indiceOrigen >= static_cast<int>(territorios.size())) {
+            cout << "Número de territorio inválido.\n";
+        }
+    }
+
+    // Obtener el territorio de origen
+    Territorio& territorioOrigen = territorios[indiceOrigen];
+
+    // Mostrar los territorios vecinos del territorio de origen
+    vector<Territorio*> vecinos = territorioOrigen.getTerritoriosVecinos();
+    cout << "Territorios vecinos del territorio de origen:\n";
+    for (size_t i = 0; i < vecinos.size(); ++i) {
+        cout << i + 1 << ". " << vecinos[i]->getNombre() << endl;
+    }
+
+    // Seleccionar el territorio destino
+    int indiceDestino = -1;
+    while (indiceDestino < 0 || indiceDestino >= static_cast<int>(vecinos.size())) {
+        cout << "Selecciona el número de territorio de destino: ";
+        cin >> indiceDestino;
+
+        if (indiceDestino < 0 || indiceDestino >= static_cast<int>(vecinos.size())) {
+            cout << "Número de territorio inválido.\n";
+        }
+    }
+
+    // Obtener el territorio de destino
+    Territorio& territorioDestino = *vecinos[indiceDestino];
+
+    // Verificar si la fortificación es válida según las reglas
+    if (!verificarFortificacionValida(territorioOrigen, territorioDestino)) {
+        cout << "La fortificación no es válida.\n";
+        return;
+    }
+
+    // Seleccionar la cantidad de unidades a trasladar
+    int cantidadUnidades = -1;
+    while (cantidadUnidades < 0 || cantidadUnidades >= territorioOrigen.getUnidades()) {
+        cout << "Selecciona la cantidad de unidades a trasladar (hasta " << territorioOrigen.getUnidades() - 1 << "): ";
+        cin >> cantidadUnidades;
+
+        if (cantidadUnidades < 0 || cantidadUnidades >= territorioOrigen.getUnidades()) {
+            cout << "Cantidad de unidades inválida.\n";
+        }
+    }
+
+    // Realizar la fortificación
+    territorioOrigen.restarUnidades(cantidadUnidades);
+    territorioDestino.sumarUnidades(cantidadUnidades);
+
+    cout << "Se han fortificado " << cantidadUnidades << " unidades desde " << territorioOrigen.getNombre()
+         << " a " << territorioDestino.getNombre() << ".\n";
+}
+void atacarTerritorio(Jugador& jugadorAtacante, Territorio& territorioAtacante, Territorio& territorioDefensor) {
+    // Mostrar información del ataque
+    cout << "Ataque desde " << territorioAtacante.getNombre() << " hacia " << territorioDefensor.getNombre() << ".\n";
+
+    // Lanzar dados
+    int dadosAtacante = min(3, territorioAtacante.getUnidades() - 1);
+    int dadosDefensor = min(2, territorioDefensor.getUnidades());
+
+    vector<int> resultadosAtacante(dadosAtacante);
+    vector<int> resultadosDefensor(dadosDefensor);
+
+    for (int i = 0; i < dadosAtacante; ++i) {
+        resultadosAtacante[i] = lanzarDado();
+    }
+
+    for (int i = 0; i < dadosDefensor; ++i) {
+        resultadosDefensor[i] = lanzarDado();
+    }
+
+    // Ordenar resultados de mayor a menor
+    sort(resultadosAtacante.begin(), resultadosAtacante.end(), greater<int>());
+    sort(resultadosDefensor.begin(), resultadosDefensor.end(), greater<int>());
+
+    // Calcular pérdidas de unidades
+    int perdidasAtacante = 0;
+    int perdidasDefensor = 0;
+
+    for (size_t i = 0; i < min(dadosDefensor, dadosAtacante); ++i) {
+        if (resultadosAtacante[i] > resultadosDefensor[i]) {
+            perdidasDefensor++;
+        } else {
+            perdidasAtacante++;
+        }
+    }
+
+    // Aplicar pérdidas de unidades
+    territorioAtacante.restarUnidades(perdidasAtacante);
+    territorioDefensor.restarUnidades(perdidasDefensor);
+
+    cout << "Resultado del ataque:\n";
+    cout << "Atacante perdió " << perdidasAtacante << " unidades.\n";
+    cout << "Defensor perdió " << perdidasDefensor << " unidades.\n";
+}
+void atacarTerritorio(Jugador& atacante, Territorio& territorioAtacante, Territorio& territorioDefensor) {
+    // Definir la cantidad de dados para el ataque y la defensa
+    int dadosAtaque = min(3, territorioAtacante.getNumUnidades() - 1);
+    int dadosDefensa = min(2, territorioDefensor.getNumUnidades());
+
+    // Lanzar dados
+    vector<int> resultadosAtaque = lanzarDados(dadosAtaque);
+    vector<int> resultadosDefensa = lanzarDados(dadosDefensa);
+
+    // Mostrar resultados de los dados
+    cout << "Resultados de los dados del atacante: ";
+    for (int resultado : resultadosAtaque) {
+        cout << resultado << " ";
+    }
+    cout << "\n";
+    cout << "Resultados de los dados del defensor: ";
+    for (int resultado : resultadosDefensa) {
+        cout << resultado << " ";
+    }
+    cout << "\n";
+
+    // Comparar resultados de los dados y aplicar pérdidas
+    int unidadesPerdidasAtacante = 0;
+    int unidadesPerdidasDefensor = 0;
+    for (size_t i = 0; i < min(resultadosAtaque.size(), resultadosDefensa.size()); ++i) {
+        if (resultadosAtaque[i] > resultadosDefensa[i]) {
+            unidadesPerdidasDefensor++;
+        } else {
+            unidadesPerdidasAtacante++;
+        }
+    }
+
+    // Aplicar pérdidas de unidades
+    territorioAtacante.reducirUnidades(unidadesPerdidasAtacante);
+    territorioDefensor.reducirUnidades(unidadesPerdidasDefensor);
+
+    // Mostrar unidades perdidas
+    cout << "El atacante pierde " << unidadesPerdidasAtacante << " unidades.\n";
+    cout << "El defensor pierde " << unidadesPerdidasDefensor << " unidades.\n";
+
+    // Si el defensor pierde todas sus unidades, el atacante puede conquistar el territorio
+    if (territorioDefensor.getNumUnidades() == 0) {
+        // Mover unidades del atacante al territorio conquistado
+        int unidadesMovidas = min(dadosAtaque, territorioAtacante.getNumUnidades() - 1);
+        territorioAtacante.reducirUnidades(unidadesMovidas);
+        territorioDefensor.aumentarUnidades(unidadesMovidas);
+
+        cout << "El atacante conquista el territorio " << territorioDefensor.getNombre() << ".\n";
+    }
+}
+
 
