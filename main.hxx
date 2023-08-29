@@ -9,6 +9,7 @@
 #include <string>
 #include <vector>
 #include <stdlib.h>
+#include <map>
 //// LLAMADO DE ARCHIVOS ADICIONALES.
 #include "comandos.hxx"
 #include "TAD_Carta.hxx"
@@ -31,6 +32,7 @@ extern int nJugadores;
 void llenarMazo ( void ) ;
 void llenarJugadores ( void ) ;
 void funcioon_Jugar ( void ) ;
+void crearMapa ( void ) ;
 
 
 

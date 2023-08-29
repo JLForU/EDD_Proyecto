@@ -1,3 +1,4 @@
+
 // INICIO DIRECTIVAS DE PREPROCESAMIENTO.
 //// MACROS.
 #ifndef TAD_TERRITORIO_HXX
@@ -18,7 +19,6 @@ class Territorio {
         string nombre ;
         string continente ;
         int id ;
-	vector<Territorio*> vecinos;
 
     public :
 
@@ -29,15 +29,13 @@ class Territorio {
         Territorio ( string nuevoNombre , string nuevoContinente , int nuevoID ) ;
         
         //// GETTERS ////
-        string getNombre ( ) ;
-        string getContinente ( ) ;
-        int getID ( ) ;
+        string getNombre ( void ) ;
+        string getContinente ( void ) ;
+        int getID ( void ) ;
         //// SETTERS ////
         void setNombre ( string nuevoNombre ) ;
         void setContinente ( string nuevoContinente ) ;
         void setID ( int nuevoID ) ;
-	void agregarVecino(Territorio* vecino);
-	vector<Territorio*> getVecinos();
 
 
 } ;
@@ -46,3 +44,4 @@ class Territorio {
 
 // FIN DE DIRECTIVAS DE PREPROCESAMIENTO.
 #endif  // TAD_TERRITORIO_HXX
+

@@ -33,13 +33,14 @@ class Jugador {
 
         //// GETTERS ////
         string getNombre ( void ) ;
+        vector <Territorio> getTerritorios ( void ) ;
         //// SETTERS ////
         void setNombre ( string nuevoNombre ) ;
 
         //// COMPORTAMIENTOS ////
 		void agregarTropa(Ejercito nuevaTropa);
 		void asignarTerritorio(Territorio nuevoTerritorio);
-		/*Territorio obtenerTerritorio(string nombreTerritorio);*/
+        bool verificarTerritorioExistente ( string territorioPorBuscar ) ;
 
 
 } ;

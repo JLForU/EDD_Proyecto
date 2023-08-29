@@ -122,268 +122,274 @@ void funcioon_Jugar ( void ) {
     } while ( true ) ;
 
 }
-void crear mapa(){ 
-std::map<std::string, Territorio> territorios;
 
-// Crear territorios de América del Norte
-    territorios["Alaska"] = Territorio("Alaska", "Amarillo");
-    territorios["Alberta"] = Territorio("Alberta", "Amarillo");
-    territorios["Territorio Noroccidental"] = Territorio("Territorio Noroccidental", "Amarillo");
-    territorios["America Central"] = Territorio("America Central", "Amarillo");
-    territorios["Estados Unidos Orientales"] = Territorio("Estados Unidos Orientales", "Amarillo");
-    territorios["Groenlandia"] = Territorio("Groenlandia", "Amarillo");
-    territorios["Territorio Noroccidental"] = Territorio("Territorio Noroccidental", "Amarillo");
-    territorios["Ontario"] = Territorio("Ontario", "Amarillo");
-    territorios["Quebec"] = Territorio("Quebec", "Amarillo");
-    territorios["Estados Unidos Occidentales"] = Territorio("Estados Unidos Occidentales", "Amarillo");
+
+/*
+void crearMapa ( void ) {
+
+    map<string,Territorio> mapaTerritorios ;
+
+    // Crear territorios de América del Norte
+    mapaTerritorios["Alaska"] = Territorio ( "Alaska" , "América del Norte" , 1 );
+    mapaTerritorios["Alberta"] = Territorio ( "Alberta" , "América del Norte" , 2 );
+    mapaTerritorios["Territorio Noroccidental"] = Territorio(" T erritorio Noroccidental" , "América del Norte" , 3 );
+    mapaTerritorios["America Central"] = Territorio(" A merica Central" , "América del Norte" , 0 );
+    mapaTerritorios["Estados Unidos Orientales"] = Territorio("Estados  U nidos Orientales" , "América del Norte" , 0 );
+    mapaTerritorios["Groenlandia"] = Territorio ( "Groenlandia" , "América del Norte" , 0 );
+    mapaTerritorios["Territorio Noroccidental"] = Territorio(" T erritorio Noroccidental" , "América del Norte" , 0 );
+    mapaTerritorios["Ontario"] = Territorio ( "Ontario" , "América del Norte" , 0 );
+    mapaTerritorios["Quebec"] = Territorio ( "Quebec" , "América del Norte" , 0 );
+    mapaTerritorios["Estados Unidos Occidentales"] = Territorio("Estados  U nidos Occidentales" , "América del Norte" , 0 );
 
     // Conectar territorios con sus vecinos (América del Norte)
-    territorios["Alaska"].agregarVecino(&territorios["Alberta"]);
-    territorios["Alaska"].agregarVecino(&territorios["Territorio Noroccidental"]);
+    mapaTerritorios["Alaska"].agregarVecino(&mapaTerritorios["Alberta"]);
+    mapaTerritorios["Alaska"].agregarVecino(&mapaTerritorios["Territorio Noroccidental"]);
 
-    territorios["Alberta"].agregarVecino(&territorios["Alaska"]);
-    territorios["Alberta"].agregarVecino(&territorios["Territorio Noroccidental"]);
-    territorios["Alberta"].agregarVecino(&territorios["Ontario"]);
+    mapaTerritorios["Alberta"].agregarVecino(&mapaTerritorios["Alaska"]);
+    mapaTerritorios["Alberta"].agregarVecino(&mapaTerritorios["Territorio Noroccidental"]);
+    mapaTerritorios["Alberta"].agregarVecino(&mapaTerritorios["Ontario"]);
 
-    territorios["Territorio Noroccidental"].agregarVecino(&territorios["Alaska"]);
-    territorios["Territorio Noroccidental"].agregarVecino(&territorios["Alberta"]);
-    territorios["Territorio Noroccidental"].agregarVecino(&territorios["Ontario"]);
-    territorios["Territorio Noroccidental"].agregarVecino(&territorios["Groenlandia"]);
+    mapaTerritorios["Territorio Noroccidental"].agregarVecino(&mapaTerritorios["Alaska"]);
+    mapaTerritorios["Territorio Noroccidental"].agregarVecino(&mapaTerritorios["Alberta"]);
+    mapaTerritorios["Territorio Noroccidental"].agregarVecino(&mapaTerritorios["Ontario"]);
+    mapaTerritorios["Territorio Noroccidental"].agregarVecino(&mapaTerritorios["Groenlandia"]);
 
-    territorios["America Central"].agregarVecino(&territorios["Estados Unidos Orientales"]);
-    territorios["America Central"].agregarVecino(&territorios["Quebec"]);
-    territorios["America Central"].agregarVecino(&territorios["Venezuela"]);
+    mapaTerritorios["America Central"].agregarVecino(&mapaTerritorios["Estados Unidos Orientales"]);
+    mapaTerritorios["America Central"].agregarVecino(&mapaTerritorios["Quebec"]);
+    mapaTerritorios["America Central"].agregarVecino(&mapaTerritorios["Venezuela"]);
 
-    territorios["Estados Unidos Orientales"].agregarVecino(&territorios["America Central"]);
-    territorios["Estados Unidos Orientales"].agregarVecino(&territorios["Estados Unidos Occidentales"]);
-    territorios["Estados Unidos Orientales"].agregarVecino(&territorios["Ontario"]);
-    territorios["Estados Unidos Orientales"].agregarVecino(&territorios["Quebec"]);
+    mapaTerritorios["Estados Unidos Orientales"].agregarVecino(&mapaTerritorios["America Central"]);
+    mapaTerritorios["Estados Unidos Orientales"].agregarVecino(&mapaTerritorios["Estados Unidos Occidentales"]);
+    mapaTerritorios["Estados Unidos Orientales"].agregarVecino(&mapaTerritorios["Ontario"]);
+    mapaTerritorios["Estados Unidos Orientales"].agregarVecino(&mapaTerritorios["Quebec"]);
 
-    territorios["Groenlandia"].agregarVecino(&territorios["Territorio Noroccidental"]);
-    territorios["Groenlandia"].agregarVecino(&territorios["Ontario"]);
-    territorios["Groenlandia"].agregarVecino(&territorios["Quebec"]);
-    territorios["Groenlandia"].agregarVecino(&territorios["Islandia"]);
+    mapaTerritorios["Groenlandia"].agregarVecino(&mapaTerritorios["Territorio Noroccidental"]);
+    mapaTerritorios["Groenlandia"].agregarVecino(&mapaTerritorios["Ontario"]);
+    mapaTerritorios["Groenlandia"].agregarVecino(&mapaTerritorios["Quebec"]);
+    mapaTerritorios["Groenlandia"].agregarVecino(&mapaTerritorios["Islandia"]);
 
-    territorios["Territorio Noroccidental"].agregarVecino(&territorios["Alaska"]);
-    territorios["Territorio Noroccidental"].agregarVecino(&territorios["Alberta"]);
-    territorios["Territorio Noroccidental"].agregarVecino(&territorios["Ontario"]);
-    territorios["Territorio Noroccidental"].agregarVecino(&territorios["Groenlandia"]);
+    mapaTerritorios["Territorio Noroccidental"].agregarVecino(&mapaTerritorios["Alaska"]);
+    mapaTerritorios["Territorio Noroccidental"].agregarVecino(&mapaTerritorios["Alberta"]);
+    mapaTerritorios["Territorio Noroccidental"].agregarVecino(&mapaTerritorios["Ontario"]);
+    mapaTerritorios["Territorio Noroccidental"].agregarVecino(&mapaTerritorios["Groenlandia"]);
 
-    territorios["Ontario"].agregarVecino(&territorios["Alberta"]);
-    territorios["Ontario"].agregarVecino(&territorios["Territorio Noroccidental"]);
-    territorios["Ontario"].agregarVecino(&territorios["Estados Unidos Orientales"]);
-    territorios["Ontario"].agregarVecino(&territorios["Quebec"]);
-    territorios["Ontario"].agregarVecino(&territorios["Groenlandia"]);
+    mapaTerritorios["Ontario"].agregarVecino(&mapaTerritorios["Alberta"]);
+    mapaTerritorios["Ontario"].agregarVecino(&mapaTerritorios["Territorio Noroccidental"]);
+    mapaTerritorios["Ontario"].agregarVecino(&mapaTerritorios["Estados Unidos Orientales"]);
+    mapaTerritorios["Ontario"].agregarVecino(&mapaTerritorios["Quebec"]);
+    mapaTerritorios["Ontario"].agregarVecino(&mapaTerritorios["Groenlandia"]);
 
-    territorios["Quebec"].agregarVecino(&territorios["Estados Unidos Orientales"]);
-    territorios["Quebec"].agregarVecino(&territorios["Ontario"]);
-    territorios["Quebec"].agregarVecino(&territorios["Groenlandia"]);
+    mapaTerritorios["Quebec"].agregarVecino(&mapaTerritorios["Estados Unidos Orientales"]);
+    mapaTerritorios["Quebec"].agregarVecino(&mapaTerritorios["Ontario"]);
+    mapaTerritorios["Quebec"].agregarVecino(&mapaTerritorios["Groenlandia"]);
 
-    territorios["Estados Unidos Occidentales"].agregarVecino(&territorios["Estados Unidos Orientales"]);
-    territorios["Estados Unidos Occidentales"].agregarVecino(&territorios["America Central"]);
-    territorios["Estados Unidos Occidentales"].agregarVecino(&territorios["Ontario"]);
+    mapaTerritorios["Estados Unidos Occidentales"].agregarVecino(&mapaTerritorios["Estados Unidos Orientales"]);
+    mapaTerritorios["Estados Unidos Occidentales"].agregarVecino(&mapaTerritorios["America Central"]);
+    mapaTerritorios["Estados Unidos Occidentales"].agregarVecino(&mapaTerritorios["Ontario"]);
 
     // Crear territorios de América del Sur
-territorios["Argentina"] = Territorio("Argentina", "Purpura");
-territorios["Brasil"] = Territorio("Brasil", "Purpura");
-territorios["Peru"] = Territorio("Peru", "Purpura");
-territorios["Venezuela"] = Territorio("Venezuela", "Purpura");
+    mapaTerritorios["Argentina"] = Territorio("Argentina", "Purpura");
+    mapaTerritorios["Brasil"] = Territorio("Brasil", "Purpura");
+    mapaTerritorios["Peru"] = Territorio("Peru", "Purpura");
+    mapaTerritorios["Venezuela"] = Territorio("Venezuela", "Purpura");
 
-// Conectar territorios con sus vecinos (América del Sur)
-territorios["Argentina"].agregarVecino(&territorios["Peru"]);
-territorios["Argentina"].agregarVecino(&territorios["Brasil"]);
+    // Conectar territorios con sus vecinos (América del Sur)
+    mapaTerritorios["Argentina"].agregarVecino(&mapaTerritorios["Peru"]);
+    mapaTerritorios["Argentina"].agregarVecino(&mapaTerritorios["Brasil"]);
 
-territorios["Brasil"].agregarVecino(&territorios["Argentina"]);
-territorios["Brasil"].agregarVecino(&territorios["Peru"]);
-territorios["Brasil"].agregarVecino(&territorios["Venezuela"]);
-territorios["Brasil"].agregarVecino(&territorios["Africa del Norte"]);
+    mapaTerritorios["Brasil"].agregarVecino(&mapaTerritorios["Argentina"]);
+    mapaTerritorios["Brasil"].agregarVecino(&mapaTerritorios["Peru"]);
+    mapaTerritorios["Brasil"].agregarVecino(&mapaTerritorios["Venezuela"]);
+    mapaTerritorios["Brasil"].agregarVecino(&mapaTerritorios["Africa del Norte"]);
 
-territorios["Peru"].agregarVecino(&territorios["Argentina"]);
-territorios["Peru"].agregarVecino(&territorios["Brasil"]);
-territorios["Peru"].agregarVecino(&territorios["Venezuela"]);
+    mapaTerritorios["Peru"].agregarVecino(&mapaTerritorios["Argentina"]);
+    mapaTerritorios["Peru"].agregarVecino(&mapaTerritorios["Brasil"]);
+    mapaTerritorios["Peru"].agregarVecino(&mapaTerritorios["Venezuela"]);
 
-territorios["Venezuela"].agregarVecino(&territorios["Brasil"]);
-territorios["Venezuela"].agregarVecino(&territorios["Peru"]);
-territorios["Venezuela"].agregarVecino(&territorios["America Central"]);
+    mapaTerritorios["Venezuela"].agregarVecino(&mapaTerritorios["Brasil"]);
+    mapaTerritorios["Venezuela"].agregarVecino(&mapaTerritorios["Peru"]);
+    mapaTerritorios["Venezuela"].agregarVecino(&mapaTerritorios["America Central"]);
 
-// Crear territorios de Europa
-territorios["Gran Bretaña"] = Territorio("Gran Bretaña", "Azul");
-territorios["Islandia"] = Territorio("Islandia", "Azul");
-territorios["Europa del Norte"] = Territorio("Europa del Norte", "Azul");
-territorios["Escandinavia"] = Territorio("Escandinavia", "Azul");
-territorios["Europa del Sur"] = Territorio("Europa del Sur", "Azul");
-territorios["Ucrania"] = Territorio("Ucrania", "Azul");
-territorios["Europa Occidental"] = Territorio("Europa Occidental", "Azul");
+    // Crear territorios de Europa
+    mapaTerritorios["Gran Bretaña"] = Territorio("Gran Bretaña", "Azul");
+    mapaTerritorios["Islandia"] = Territorio("Islandia", "Azul");
+    mapaTerritorios["Europa del Norte"] = Territorio("Europa del Norte", "Azul");
+    mapaTerritorios["Escandinavia"] = Territorio("Escandinavia", "Azul");
+    mapaTerritorios["Europa del Sur"] = Territorio("Europa del Sur", "Azul");
+    mapaTerritorios["Ucrania"] = Territorio("Ucrania", "Azul");
+    mapaTerritorios["Europa Occidental"] = Territorio("Europa Occidental", "Azul");
 
-// Conectar territorios con sus vecinos (Europa)
-territorios["Gran Bretaña"].agregarVecino(&territorios["Islandia"]);
-territorios["Gran Bretaña"].agregarVecino(&territorios["Europa del Norte"]);
-territorios["Gran Bretaña"].agregarVecino(&territorios["Escandinavia"]);
-territorios["Gran Bretaña"].agregarVecino(&territorios["Europa Occidental"]);
+    // Conectar territorios con sus vecinos (Europa)
+    mapaTerritorios["Gran Bretaña"].agregarVecino(&mapaTerritorios["Islandia"]);
+    mapaTerritorios["Gran Bretaña"].agregarVecino(&mapaTerritorios["Europa del Norte"]);
+    mapaTerritorios["Gran Bretaña"].agregarVecino(&mapaTerritorios["Escandinavia"]);
+    mapaTerritorios["Gran Bretaña"].agregarVecino(&mapaTerritorios["Europa Occidental"]);
 
-territorios["Islandia"].agregarVecino(&territorios["Gran Bretaña"]);
-territorios["Islandia"].agregarVecino(&territorios["Europa del Norte"]);
-territorios["Islandia"].agregarVecino(&territorios["Escandinavia"]);
-territorios["Islandia"].agregarVecino(&territorios["Groenlandia"]);
+    mapaTerritorios["Islandia"].agregarVecino(&mapaTerritorios["Gran Bretaña"]);
+    mapaTerritorios["Islandia"].agregarVecino(&mapaTerritorios["Europa del Norte"]);
+    mapaTerritorios["Islandia"].agregarVecino(&mapaTerritorios["Escandinavia"]);
+    mapaTerritorios["Islandia"].agregarVecino(&mapaTerritorios["Groenlandia"]);
 
-territorios["Europa del Norte"].agregarVecino(&territorios["Gran Bretaña"]);
-territorios["Europa del Norte"].agregarVecino(&territorios["Escandinavia"]);
-territorios["Europa del Norte"].agregarVecino(&territorios["Europa del Sur"]);
-territorios["Europa del Norte"].agregarVecino(&territorios["Ucrania"]);
-territorios["Europa del Norte"].agregarVecino(&territorios["Europa Occidental"]);
+    mapaTerritorios["Europa del Norte"].agregarVecino(&mapaTerritorios["Gran Bretaña"]);
+    mapaTerritorios["Europa del Norte"].agregarVecino(&mapaTerritorios["Escandinavia"]);
+    mapaTerritorios["Europa del Norte"].agregarVecino(&mapaTerritorios["Europa del Sur"]);
+    mapaTerritorios["Europa del Norte"].agregarVecino(&mapaTerritorios["Ucrania"]);
+    mapaTerritorios["Europa del Norte"].agregarVecino(&mapaTerritorios["Europa Occidental"]);
 
-territorios["Escandinavia"].agregarVecino(&territorios["Gran Bretaña"]);
-territorios["Escandinavia"].agregarVecino(&territorios["Islandia"]);
-territorios["Escandinavia"].agregarVecino(&territorios["Europa del Norte"]);
-territorios["Escandinavia"].agregarVecino(&territorios["Ucrania"]);
+    mapaTerritorios["Escandinavia"].agregarVecino(&mapaTerritorios["Gran Bretaña"]);
+    mapaTerritorios["Escandinavia"].agregarVecino(&mapaTerritorios["Islandia"]);
+    mapaTerritorios["Escandinavia"].agregarVecino(&mapaTerritorios["Europa del Norte"]);
+    mapaTerritorios["Escandinavia"].agregarVecino(&mapaTerritorios["Ucrania"]);
 
-territorios["Europa del Sur"].agregarVecino(&territorios["Europa del Norte"]);
-territorios["Europa del Sur"].agregarVecino(&territorios["Europa Occidental"]);
-territorios["Europa del Sur"].agregarVecino(&territorios["Ucrania"]);
-territorios["Europa del Sur"].agregarVecino(&territorios["Egipto"]);
+    mapaTerritorios["Europa del Sur"].agregarVecino(&mapaTerritorios["Europa del Norte"]);
+    mapaTerritorios["Europa del Sur"].agregarVecino(&mapaTerritorios["Europa Occidental"]);
+    mapaTerritorios["Europa del Sur"].agregarVecino(&mapaTerritorios["Ucrania"]);
+    mapaTerritorios["Europa del Sur"].agregarVecino(&mapaTerritorios["Egipto"]);
 
-territorios["Ucrania"].agregarVecino(&territorios["Europa del Norte"]);
-territorios["Ucrania"].agregarVecino(&territorios["Escandinavia"]);
-territorios["Ucrania"].agregarVecino(&territorios["Europa del Sur"]);
-territorios["Ucrania"].agregarVecino(&territorios["Afghanistán"]);
-territorios["Ucrania"].agregarVecino(&territorios["Medio Oriente"]);
-territorios["Ucrania"].agregarVecino(&territorios["Ural"]);
+    mapaTerritorios["Ucrania"].agregarVecino(&mapaTerritorios["Europa del Norte"]);
+    mapaTerritorios["Ucrania"].agregarVecino(&mapaTerritorios["Escandinavia"]);
+    mapaTerritorios["Ucrania"].agregarVecino(&mapaTerritorios["Europa del Sur"]);
+    mapaTerritorios["Ucrania"].agregarVecino(&mapaTerritorios["Afghanistán"]);
+    mapaTerritorios["Ucrania"].agregarVecino(&mapaTerritorios["Medio Oriente"]);
+    mapaTerritorios["Ucrania"].agregarVecino(&mapaTerritorios["Ural"]);
 
-territorios["Europa Occidental"].agregarVecino(&territorios["Gran Bretaña"]);
-territorios["Europa Occidental"].agregarVecino(&territorios["Europa del Norte"]);
-territorios["Europa Occidental"].agregarVecino(&territorios["Europa del Sur"]);
-territorios["Europa Occidental"].agregarVecino(&territorios["Africa del Norte"]);
+    mapaTerritorios["Europa Occidental"].agregarVecino(&mapaTerritorios["Gran Bretaña"]);
+    mapaTerritorios["Europa Occidental"].agregarVecino(&mapaTerritorios["Europa del Norte"]);
+    mapaTerritorios["Europa Occidental"].agregarVecino(&mapaTerritorios["Europa del Sur"]);
+    mapaTerritorios["Europa Occidental"].agregarVecino(&mapaTerritorios["Africa del Norte"]);
 
-// Crear territorios de África
-territorios["Congo"] = Territorio("Congo", "Naranja");
-territorios["Africa Oriental"] = Territorio("Africa Oriental", "Naranja");
-territorios["Egipto"] = Territorio("Egipto", "Naranja");
-territorios["Madagascar"] = Territorio("Madagascar", "Naranja");
-territorios["Africa del Norte"] = Territorio("Africa del Norte", "Naranja");
-territorios["Africa del Sur"] = Territorio("Africa del Sur", "Naranja");
+    // Crear territorios de África
+    mapaTerritorios["Congo"] = Territorio("Congo", "Naranja");
+    mapaTerritorios["Africa Oriental"] = Territorio("Africa Oriental", "Naranja");
+    mapaTerritorios["Egipto"] = Territorio("Egipto", "Naranja");
+    mapaTerritorios["Madagascar"] = Territorio("Madagascar", "Naranja");
+    mapaTerritorios["Africa del Norte"] = Territorio("Africa del Norte", "Naranja");
+    mapaTerritorios["Africa del Sur"] = Territorio("Africa del Sur", "Naranja");
 
-// Conectar territorios con sus vecinos (África)
-territorios["Congo"].agregarVecino(&territorios["Africa Oriental"]);
-territorios["Congo"].agregarVecino(&territorios["Africa del Norte"]);
-territorios["Congo"].agregarVecino(&territorios["Africa del Sur"]);
+    // Conectar territorios con sus vecinos (África)
+    mapaTerritorios["Congo"].agregarVecino(&mapaTerritorios["Africa Oriental"]);
+    mapaTerritorios["Congo"].agregarVecino(&mapaTerritorios["Africa del Norte"]);
+    mapaTerritorios["Congo"].agregarVecino(&mapaTerritorios["Africa del Sur"]);
 
-territorios["Africa Oriental"].agregarVecino(&territorios["Congo"]);
-territorios["Africa Oriental"].agregarVecino(&territorios["Egipto"]);
-territorios["Africa Oriental"].agregarVecino(&territorios["Madagascar"]);
-territorios["Africa Oriental"].agregarVecino(&territorios["Africa del Sur"]);
+    mapaTerritorios["Africa Oriental"].agregarVecino(&mapaTerritorios["Congo"]);
+    mapaTerritorios["Africa Oriental"].agregarVecino(&mapaTerritorios["Egipto"]);
+    mapaTerritorios["Africa Oriental"].agregarVecino(&mapaTerritorios["Madagascar"]);
+    mapaTerritorios["Africa Oriental"].agregarVecino(&mapaTerritorios["Africa del Sur"]);
 
-territorios["Egipto"].agregarVecino(&territorios["Europa del Sur"]);
-territorios["Egipto"].agregarVecino(&territorios["Medio Oriente"]);
-territorios["Egipto"].agregarVecino(&territorios["Africa Oriental"]);
-territorios["Egipto"].agregarVecino(&territorios["Africa del Norte"]);
+    mapaTerritorios["Egipto"].agregarVecino(&mapaTerritorios["Europa del Sur"]);
+    mapaTerritorios["Egipto"].agregarVecino(&mapaTerritorios["Medio Oriente"]);
+    mapaTerritorios["Egipto"].agregarVecino(&mapaTerritorios["Africa Oriental"]);
+    mapaTerritorios["Egipto"].agregarVecino(&mapaTerritorios["Africa del Norte"]);
 
-territorios["Madagascar"].agregarVecino(&territorios["Africa Oriental"]);
-territorios["Madagascar"].agregarVecino(&territorios["Africa del Sur"]);
+    mapaTerritorios["Madagascar"].agregarVecino(&mapaTerritorios["Africa Oriental"]);
+    mapaTerritorios["Madagascar"].agregarVecino(&mapaTerritorios["Africa del Sur"]);
 
-territorios["Africa del Norte"].agregarVecino(&territorios["Congo"]);
-territorios["Africa del Norte"].agregarVecino(&territorios["Africa Oriental"]);
-territorios["Africa del Norte"].agregarVecino(&territorios["Egipto"]);
-territorios["Africa del Norte"].agregarVecino(&territorios["Brasil"]);
+    mapaTerritorios["Africa del Norte"].agregarVecino(&mapaTerritorios["Congo"]);
+    mapaTerritorios["Africa del Norte"].agregarVecino(&mapaTerritorios["Africa Oriental"]);
+    mapaTerritorios["Africa del Norte"].agregarVecino(&mapaTerritorios["Egipto"]);
+    mapaTerritorios["Africa del Norte"].agregarVecino(&mapaTerritorios["Brasil"]);
 
-territorios["Africa del Sur"].agregarVecino(&territorios["Congo"]);
-territorios["Africa del Sur"].agregarVecino(&territorios["Africa Oriental"]);
-territorios["Africa del Sur"].agregarVecino(&territorios["Madagascar"]);
+    mapaTerritorios["Africa del Sur"].agregarVecino(&mapaTerritorios["Congo"]);
+    mapaTerritorios["Africa del Sur"].agregarVecino(&mapaTerritorios["Africa Oriental"]);
+    mapaTerritorios["Africa del Sur"].agregarVecino(&mapaTerritorios["Madagascar"]);
 
-// Crear territorios de Asia
-territorios["Afghanistán"] = Territorio("Afghanistán", "Verde");
-territorios["China"] = Territorio("China", "Verde");
-territorios["India"] = Territorio("India", "Verde");
-territorios["Irkustsk"] = Territorio("Irkustsk", "Verde");
-territorios["Japon"] = Territorio("Japon", "Verde");
-territorios["Kamchatka"] = Territorio("Kamchatka", "Verde");
-territorios["Medio Oriente"] = Territorio("Medio Oriente", "Verde");
-territorios["Mongolia"] = Territorio("Mongolia", "Verde");
-territorios["Siam"] = Territorio("Siam", "Verde");
-territorios["Siberia"] = Territorio("Siberia", "Verde");
-territorios["Ural"] = Territorio("Ural", "Verde");
-territorios["Yakutsk"] = Territorio("Yakutsk", "Verde");
+    // Crear territorios de Asia
+    mapaTerritorios["Afghanistán"] = Territorio("Afghanistán", "Verde");
+    mapaTerritorios["China"] = Territorio("China", "Verde");
+    mapaTerritorios["India"] = Territorio("India", "Verde");
+    mapaTerritorios["Irkustsk"] = Territorio("Irkustsk", "Verde");
+    mapaTerritorios["Japon"] = Territorio("Japon", "Verde");
+    mapaTerritorios["Kamchatka"] = Territorio("Kamchatka", "Verde");
+    mapaTerritorios["Medio Oriente"] = Territorio("Medio Oriente", "Verde");
+    mapaTerritorios["Mongolia"] = Territorio("Mongolia", "Verde");
+    mapaTerritorios["Siam"] = Territorio("Siam", "Verde");
+    mapaTerritorios["Siberia"] = Territorio("Siberia", "Verde");
+    mapaTerritorios["Ural"] = Territorio("Ural", "Verde");
+    mapaTerritorios["Yakutsk"] = Territorio("Yakutsk", "Verde");
 
-// Conectar territorios con sus vecinos (Asia)
-territorios["Afghanistán"].agregarVecino(&territorios["China"]);
-territorios["Afghanistán"].agregarVecino(&territorios["India"]);
-territorios["Afghanistán"].agregarVecino(&territorios["Medio Oriente"]);
-territorios["Afghanistán"].agregarVecino(&territorios["Ural"]);
-territorios["Afghanistán"].agregarVecino(&territorios["Ucrania"]);
+    // Conectar territorios con sus vecinos (Asia)
+    mapaTerritorios["Afghanistán"].agregarVecino(&mapaTerritorios["China"]);
+    mapaTerritorios["Afghanistán"].agregarVecino(&mapaTerritorios["India"]);
+    mapaTerritorios["Afghanistán"].agregarVecino(&mapaTerritorios["Medio Oriente"]);
+    mapaTerritorios["Afghanistán"].agregarVecino(&mapaTerritorios["Ural"]);
+    mapaTerritorios["Afghanistán"].agregarVecino(&mapaTerritorios["Ucrania"]);
 
-territorios["China"].agregarVecino(&territorios["Afghanistán"]);
-territorios["China"].agregarVecino(&territorios["India"]);
-territorios["China"].agregarVecino(&territorios["Mongolia"]);
-territorios["China"].agregarVecino(&territorios["Siam"]);
-territorios["China"].agregarVecino(&territorios["Siberia"]);
-territorios["China"].agregarVecino(&territorios["Ural"]);
+    mapaTerritorios["China"].agregarVecino(&mapaTerritorios["Afghanistán"]);
+    mapaTerritorios["China"].agregarVecino(&mapaTerritorios["India"]);
+    mapaTerritorios["China"].agregarVecino(&mapaTerritorios["Mongolia"]);
+    mapaTerritorios["China"].agregarVecino(&mapaTerritorios["Siam"]);
+    mapaTerritorios["China"].agregarVecino(&mapaTerritorios["Siberia"]);
+    mapaTerritorios["China"].agregarVecino(&mapaTerritorios["Ural"]);
 
-territorios["India"].agregarVecino(&territorios["Afghanistán"]);
-territorios["India"].agregarVecino(&territorios["China"]);
-territorios["India"].agregarVecino(&territorios["Medio Oriente"]);
-territorios["India"].agregarVecino(&territorios["Siam"]);
+    mapaTerritorios["India"].agregarVecino(&mapaTerritorios["Afghanistán"]);
+    mapaTerritorios["India"].agregarVecino(&mapaTerritorios["China"]);
+    mapaTerritorios["India"].agregarVecino(&mapaTerritorios["Medio Oriente"]);
+    mapaTerritorios["India"].agregarVecino(&mapaTerritorios["Siam"]);
 
-territorios["Irkustsk"].agregarVecino(&territorios["Kamchatka"]);
-territorios["Irkustsk"].agregarVecino(&territorios["Mongolia"]);
-territorios["Irkustsk"].agregarVecino(&territorios["Siberia"]);
-territorios["Irkustsk"].agregarVecino(&territorios["Yakutsk"]);
+    mapaTerritorios["Irkustsk"].agregarVecino(&mapaTerritorios["Kamchatka"]);
+    mapaTerritorios["Irkustsk"].agregarVecino(&mapaTerritorios["Mongolia"]);
+    mapaTerritorios["Irkustsk"].agregarVecino(&mapaTerritorios["Siberia"]);
+    mapaTerritorios["Irkustsk"].agregarVecino(&mapaTerritorios["Yakutsk"]);
 
-territorios["Japon"].agregarVecino(&territorios["Kamchatka"]);
-territorios["Japon"].agregarVecino(&territorios["Mongolia"]);
+    mapaTerritorios["Japon"].agregarVecino(&mapaTerritorios["Kamchatka"]);
+    mapaTerritorios["Japon"].agregarVecino(&mapaTerritorios["Mongolia"]);
 
-territorios["Kamchatka"].agregarVecino(&territorios["Japon"]);
-territorios["Kamchatka"].agregarVecino(&territorios["Irkustsk"]);
-territorios["Kamchatka"].agregarVecino(&territorios["Mongolia"]);
-territorios["Kamchatka"].agregarVecino(&territorios["Yakutsk"]);
+    mapaTerritorios["Kamchatka"].agregarVecino(&mapaTerritorios["Japon"]);
+    mapaTerritorios["Kamchatka"].agregarVecino(&mapaTerritorios["Irkustsk"]);
+    mapaTerritorios["Kamchatka"].agregarVecino(&mapaTerritorios["Mongolia"]);
+    mapaTerritorios["Kamchatka"].agregarVecino(&mapaTerritorios["Yakutsk"]);
 
-territorios["Medio Oriente"].agregarVecino(&territorios["Afghanistán"]);
-territorios["Medio Oriente"].agregarVecino(&territorios["India"]);
-territorios["Medio Oriente"].agregarVecino(&territorios["Ucrania"]);
-territorios["Medio Oriente"].agregarVecino(&territorios["Egipto"]);
+    mapaTerritorios["Medio Oriente"].agregarVecino(&mapaTerritorios["Afghanistán"]);
+    mapaTerritorios["Medio Oriente"].agregarVecino(&mapaTerritorios["India"]);
+    mapaTerritorios["Medio Oriente"].agregarVecino(&mapaTerritorios["Ucrania"]);
+    mapaTerritorios["Medio Oriente"].agregarVecino(&mapaTerritorios["Egipto"]);
 
-territorios["Mongolia"].agregarVecino(&territorios["China"]);
-territorios["Mongolia"].agregarVecino(&territorios["Irkustsk"]);
-territorios["Mongolia"].agregarVecino(&territorios["Japon"]);
-territorios["Mongolia"].agregarVecino(&territorios["Kamchatka"]);
-territorios["Mongolia"].agregarVecino(&territorios["Siberia"]);
+    mapaTerritorios["Mongolia"].agregarVecino(&mapaTerritorios["China"]);
+    mapaTerritorios["Mongolia"].agregarVecino(&mapaTerritorios["Irkustsk"]);
+    mapaTerritorios["Mongolia"].agregarVecino(&mapaTerritorios["Japon"]);
+    mapaTerritorios["Mongolia"].agregarVecino(&mapaTerritorios["Kamchatka"]);
+    mapaTerritorios["Mongolia"].agregarVecino(&mapaTerritorios["Siberia"]);
 
-territorios["Siam"].agregarVecino(&territorios["China"]);
-territorios["Siam"].agregarVecino(&territorios["India"]);
-territorios["Siam"].agregarVecino(&territorios["Indonesia"]);
+    mapaTerritorios["Siam"].agregarVecino(&mapaTerritorios["China"]);
+    mapaTerritorios["Siam"].agregarVecino(&mapaTerritorios["India"]);
+    mapaTerritorios["Siam"].agregarVecino(&mapaTerritorios["Indonesia"]);
 
-territorios["Siberia"].agregarVecino(&territorios["China"]);
-territorios["Siberia"].agregarVecino(&territorios["Irkustsk"]);
-territorios["Siberia"].agregarVecino(&territorios["Mongolia"]);
-territorios["Siberia"].agregarVecino(&territorios["Ural"]);
+    mapaTerritorios["Siberia"].agregarVecino(&mapaTerritorios["China"]);
+    mapaTerritorios["Siberia"].agregarVecino(&mapaTerritorios["Irkustsk"]);
+    mapaTerritorios["Siberia"].agregarVecino(&mapaTerritorios["Mongolia"]);
+    mapaTerritorios["Siberia"].agregarVecino(&mapaTerritorios["Ural"]);
 
-territorios["Ural"].agregarVecino(&territorios["Afghanistán"]);
-territorios["Ural"].agregarVecino(&territorios["China"]);
-territorios["Ural"].agregarVecino(&territorios["Siberia"]);
-territorios["Ural"].agregarVecino(&territorios["Ucrania"]);
+    mapaTerritorios["Ural"].agregarVecino(&mapaTerritorios["Afghanistán"]);
+    mapaTerritorios["Ural"].agregarVecino(&mapaTerritorios["China"]);
+    mapaTerritorios["Ural"].agregarVecino(&mapaTerritorios["Siberia"]);
+    mapaTerritorios["Ural"].agregarVecino(&mapaTerritorios["Ucrania"]);
 
-territorios["Yakutsk"].agregarVecino(&territorios["Irkustsk"]);
-territorios["Yakutsk"].agregarVecino(&territorios["Kamchatka"]);
-territorios["Yakutsk"].agregarVecino(&territorios["Siberia"]);
+    mapaTerritorios["Yakutsk"].agregarVecino(&mapaTerritorios["Irkustsk"]);
+    mapaTerritorios["Yakutsk"].agregarVecino(&mapaTerritorios["Kamchatka"]);
+    mapaTerritorios["Yakutsk"].agregarVecino(&mapaTerritorios["Siberia"]);
 
-// Crear territorios de Australia
-territorios["Australia Oriental"] = Territorio("Australia Oriental", "Morado");
-territorios["Indonesia"] = Territorio("Indonesia", "Morado");
-territorios["Nueva Guinea"] = Territorio("Nueva Guinea", "Morado");
-territorios["Australia Occidental"] = Territorio("Australia Occidental", "Morado");
+    // Crear territorios de Australia
+    mapaTerritorios["Australia Oriental"] = Territorio("Australia Oriental", "Morado");
+    mapaTerritorios["Indonesia"] = Territorio("Indonesia", "Morado");
+    mapaTerritorios["Nueva Guinea"] = Territorio("Nueva Guinea", "Morado");
+    mapaTerritorios["Australia Occidental"] = Territorio("Australia Occidental", "Morado");
 
-// Conectar territorios con sus vecinos (Australia)
-territorios["Australia Oriental"].agregarVecino(&territorios["Nueva Guinea"]);
-territorios["Australia Oriental"].agregarVecino(&territorios["Australia Occidental"]);
+    // Conectar territorios con sus vecinos (Australia)
+    mapaTerritorios["Australia Oriental"].agregarVecino(&mapaTerritorios["Nueva Guinea"]);
+    mapaTerritorios["Australia Oriental"].agregarVecino(&mapaTerritorios["Australia Occidental"]);
 
-territorios["Indonesia"].agregarVecino(&territorios["Nueva Guinea"]);
-territorios["Indonesia"].agregarVecino(&territorios["Australia Occidental"]);
-territorios["Indonesia"].agregarVecino(&territorios["Siam"]);
+    mapaTerritorios["Indonesia"].agregarVecino(&mapaTerritorios["Nueva Guinea"]);
+    mapaTerritorios["Indonesia"].agregarVecino(&mapaTerritorios["Australia Occidental"]);
+    mapaTerritorios["Indonesia"].agregarVecino(&mapaTerritorios["Siam"]);
 
-territorios["Nueva Guinea"].agregarVecino(&territorios["Australia Oriental"]);
-territorios["Nueva Guinea"].agregarVecino(&territorios["Indonesia"]);
-territorios["Nueva Guinea"].agregarVecino(&territorios["Australia Occidental"]);
+    mapaTerritorios["Nueva Guinea"].agregarVecino(&mapaTerritorios["Australia Oriental"]);
+    mapaTerritorios["Nueva Guinea"].agregarVecino(&mapaTerritorios["Indonesia"]);
+    mapaTerritorios["Nueva Guinea"].agregarVecino(&mapaTerritorios["Australia Occidental"]);
 
-territorios["Australia Occidental"].agregarVecino(&territorios["Australia Oriental"]);
-territorios["Australia Occidental"].agregarVecino(&territorios["Indonesia"]);
-territorios["Australia Occidental"].agregarVecino(&territorios["Nueva Guinea"]);
+    mapaTerritorios["Australia Occidental"].agregarVecino(&mapaTerritorios["Australia Oriental"]);
+    mapaTerritorios["Australia Occidental"].agregarVecino(&mapaTerritorios["Indonesia"]);
+    mapaTerritorios["Australia Occidental"].agregarVecino(&mapaTerritorios["Nueva Guinea"]);
 
 }
+*/
+

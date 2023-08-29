@@ -1,3 +1,4 @@
+
 #include <algorithm>
 // DIRECTIVAS DE PREPROCESAMIENTO.
 #include "comandos.hxx"
@@ -5,8 +6,8 @@
 
 
 //Variable global
-vector<Jugador>jugadores;
-int nJugadores;
+vector<Jugador> jugadores ;
+int nJugadores ;
 
 
 
@@ -273,62 +274,83 @@ void comandoInicializar ( void ) {
 					jugadores[i].agregarTropa(anadirEjercito);
 					
 				}
-				int turnoActual = 0;
-				bool vTerritorio;
-				bool TDisponible;
-				string continente;
-				string territorioElegido;
-				int id;
-				cout<<endl<<"\t"<<"A continuacion cada jugador deberá escoger un territorio (ingresar nombre con la primera mayuscula);"<<endl;
-				for(int j=0;j<territorios.size();j++)
-				{	for (int i=0;i<territorios.size()+1;i++)
-					{
-						if(territorios[i].getContinente()!=territorios[i-1].getContinente())
-						{
-							cout<<endl<<"\t"<<territorios[i].getContinente()<<endl;
-						}
-						for(int h=0;h<jugadores.size();h++){
-							if(territorios[i].getNombre()!=jugadores[h].getTerritorios().getNombre())
-							{
-								cout<<"\t"<<territorios[i].getID()<<"\t"<<territorios[i].getNombre()<<endl;
-							}
-						}
+
+				int turnoActual=0 ;
+
+				cout << endl << "\t" << "A continuacion cada jugador deberá escoger un territorio (ingresar nombre con la primera mayuscula);" << endl ;
+
+				for ( int j=0 ; j < territorios.size() ; j++ ) {
+
+                    for ( int i=0 ; i < territorios.size() ; i++ ) {
+
+						if ( territorios[i].getContinente() != territorios[i-1].getContinente() )
+							cout << endl << "\t" << territorios[i].getContinente() << endl ;
+
+                        cout << "\t" << territorios[i].getID() << "\t" << territorios[i].getNombre() << endl ;
+
 					}
-					Jugador& jugadorActual = jugadores[turnoActual];
-					vTerritorio=false;
-					while(vTerritorio==false)
-					{
-						cout << "Turno de " << jugadorActual.getNombre() << ". Elija un territorio: ";
-						cin >> territorioElegido;
-						for(int l=0;l<jugadores.size();l++)
-						{
-							for (int k=0;k<territorios.size();k++)
-						{
-							if(jugadores[l].getTerritorios().getNombre()==territorioElegido)
-							{
-								cout<<"Este territorio se encuentra ocupado"<<endl;
-							}
-							if(territorios[k].getNombre()==territorioElegido)
-							{
-								vTerritorio=true;
-								continente=territorios[k].getContinente();
-								id=territorios[k].getID();
-								break;
-								////////////verificar que no esta en uso/////////////////
-							}
-							
-						}
-						}
-						if(vTerritorio==false){
-							cout<<"Este territorio no existe"<<endl;
-						}
+
+                    cout << endl << endl ;
+
+					Jugador& jugadorActual = jugadores[turnoActual] ;
+
+                    string territorioElegido ;
+                    string continente ;
+                    int id ;
+
+					bool territorioValido = false ;
+
+					while ( ! territorioValido ) {
+
+						cout << "Turno de " << jugadorActual.getNombre() << ". Elija un territorio: " ;
+                        cin.ignore() ;
+						getline ( cin , territorioElegido ) ;
+
+                        vector <Territorio>::iterator it ;
+                        for ( it = territorios.begin() ; it < territorios.end() ; ++it )
+                            if ( territorioElegido == it->getNombre() )
+                                territorioValido = true ;
+
+                        if ( territorioValido ) {
+
+    						for ( int l=0 ; l < jugadores.size() ; l++ ) {
+
+                                if ( jugadores[l].verificarTerritorioExistente ( territorioElegido ) ) {
+                                    cout << "El territorio " << territorioElegido << " ya se encuentra ocupado por el jugador " << jugadores[l].getNombre() << endl ;
+                                    territorioValido = false ;
+                                    break ;
+                                } else {
+                                    territorioValido = true ;
+                                }
+
+    						}
+
+
+                        }
+
+                        if ( territorioValido ) {
+
+                            for ( int k=0 ; k < territorios.size() ; k++ ) {
+
+                                if ( territorios[k].getNombre() == territorioElegido ) {
+                                    continente = territorios[k].getContinente() ;
+                                    id = territorios[k].getID() ;
+                                    break ;
+                                }
+
+                            }
+
+                        }
+
 					}
-					Territorio elegirTerritorio= Territorio(territorioElegido, continente,id);
-					jugadores[turnoActual].asignarTerritorio(elegirTerritorio);
-					turnoActual = (turnoActual + 1) % jugadores.size();
+
+					Territorio elegirTerritorio = Territorio ( territorioElegido , continente , id ) ;
+					jugadores[turnoActual].asignarTerritorio(elegirTerritorio) ;
+					turnoActual = (turnoActual+1) % jugadores.size() ;
+
 				}
 		
-    }
+        }
 
 }
 
