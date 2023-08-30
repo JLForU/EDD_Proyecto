@@ -32,9 +32,18 @@ void comandoCostoConquista ( ) ;
 void comandoConquista ( ) ;
 void comandoAyuda ( ) ;
 void comandoAyudaComando ( string primerComandoPorVerificar ) ;
+<<<<<<< HEAD
 bool verificarTurno ( string id_jugador ) ;
 bool verificarJugador ( string id_jugador ) ;
 
+=======
+bool verificarTurno ( int id_jugador ) ;
+bool verificarJugador ( int id_jugador ) ;
+void comandoTurno(int idJugador, vector<Jugador>& jugadores);
+int calcularUnidadesPorContinentes(const Jugador& jugador);
+void fortificarPosicion(Jugador& jugador);
+void atacarTerritorio(Jugador& jugadorAtacante, Territorio& territorioAtacante, Territorio& territorioDefensor);
+>>>>>>> 371fe26458810036a0d18fafde8d6f8d7c11bbb5
 
 
 // FIN DE DIRECTIVAS DE PREPROCESAMIENTO.
