@@ -49,3 +49,7 @@ void Territorio::aniadirVecino ( Territorio nuevoVecino ) {
     this -> vecinos . push_back ( nuevoVecino ) ;
 }
 
+
+bool verificarContinente(string idJugador){
+	return true;
+}

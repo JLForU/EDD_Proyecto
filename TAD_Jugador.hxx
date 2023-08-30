@@ -41,7 +41,7 @@ class Jugador {
 		void agregarTropa(Ejercito nuevaTropa);
 		void asignarTerritorio(Territorio nuevoTerritorio);
         bool verificarTerritorioExistente ( string territorioPorBuscar ) ;
-
+		int territoriosXJugador(string idJugador);
 
 } ;
 

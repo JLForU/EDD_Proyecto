@@ -1,11 +1,15 @@
 
 // DIRECTIVAS DE PREPROCESAMIENTO.
 #include "comandos.hxx"
+#include <cstring>
 
 
 //Variable global
 vector<Jugador> jugadores ;
 int nJugadores ;
+string id_jugador;
+string turno;
+int nturno;
 
 
 
@@ -65,15 +69,23 @@ string verificarComandoExistente ( string comandoEntrada ) {
 
 
 void accionarComandoCorrecto ( string primerComando ) {
-
     if ( primerComando == "inicializar" ) {
 
         comandoInicializar() ;
 
     } else if ( primerComando.find("turno ") == 0 || primerComando.find("TURNO ") == 0 ) {
-
-        if ( verificarJugador(1) ) {
-            comandoTurno(1) ;
+		if(primerComando.find("turno ")==0)
+		{
+			size_t pos=primerComando.find("turno ");
+			id_jugador=primerComando.substr(pos+strlen("turno "));
+		}
+		else
+		{
+			size_t pos=primerComando.find("TURNO ");
+			id_jugador=primerComando.substr(pos+strlen("TURNO "));
+		}
+        if ( verificarJugador(id_jugador) ) {
+            comandoTurno(id_jugador) ;
         } else {
             cout << "\nArgumentos incorrectos.\n" << flush ;            
         }
@@ -154,7 +166,7 @@ void accionarComandoCorrecto ( string primerComando ) {
 
         if ( !partidaInicializada ) {
 
-            if ( verificarJugador(1) ) {
+            if ( verificarJugador(id_jugador) ) {
 	           comandoConquista() ;
             } else {
                 cout << "\nArgumentos incorrectos.\n" << flush ;            
@@ -195,7 +207,8 @@ void comandoInicializar ( void ) {
     
     } else {
 
-        partidaInicializada = true ;		
+        partidaInicializada = true ;	
+		nturno=0;		
         cout << "El juego se ha inicializado correctamente.\n" << flush ;
 		while(nJugadores<3||nJugadores>6){
 			cout<<"Cuantos jugadores van a jugar (3/4/5/6): "<<flush;
@@ -353,28 +366,45 @@ void comandoInicializar ( void ) {
 }
 
 
-bool verificarJugador ( int id_jugador ) {
-
-    return true ;
+bool verificarJugador (string id_jugador ) {
+	for(int i=0;i<jugadores.size();i++)
+	{
+		if(id_jugador==jugadores[i].getNombre())
+		{
+			return true;
+		}
+	}
+    return false ;
 
 }
 
-bool verificarTurno ( int id_jugador ) {
-
-    return true ;
+bool verificarTurno ( string id_jugador ) {
+	Jugador& jugadorActual=jugadores[nturno];
+	if(id_jugador==jugadorActual.getNombre())
+	{
+		nturno = (nturno+1) % jugadores.size() ;
+		return true ;
+	}
+	else
+	{
+		return false;
+	}
 
 }
 
 
-void comandoTurno ( int id_jugador ) {
-
+void comandoTurno ( string id_jugador  ) {
+	int cantTerritorios;
     if (partidaInicializada) {
-    
+		
         if (!juegoFinalizado) {
         
             if (verificarJugador(id_jugador)) {
-            
                 if (verificarTurno(id_jugador)) {
+					
+
+
+					
                     cout << "El turno del jugador " << id_jugador << " ha terminado.\n" << flush;
                 } else {
                     cout << "No es el turno del jugador " << id_jugador << ".\n" << flush;

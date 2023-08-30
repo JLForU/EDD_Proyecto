@@ -42,6 +42,7 @@ class Territorio {
         //// COMPORTAMIENTOS ////
         void aniadirVecino ( Territorio nuevoVecino ) ;
 
+		bool verificarContinente(string idJugador);
 
 } ;
 

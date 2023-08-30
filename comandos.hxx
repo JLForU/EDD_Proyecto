@@ -21,7 +21,7 @@ string verificarComandoExistente ( string comandoEntrada ) ;
 void accionarComandoCorrecto ( string primerComandoPorVerificar ) ;
 void comandoInicializar ( ) ;
 bool verificarJugador ( ) ;
-void comandoTurno ( int id_jugador ) ;
+void comandoTurno ( string id_jugador ) ;
 void comandoSalir ( ) ;
 bool verificarArchivoComoArgumento ( ) ;
 void comandoGuardar ( ) ;
@@ -32,8 +32,8 @@ void comandoCostoConquista ( ) ;
 void comandoConquista ( ) ;
 void comandoAyuda ( ) ;
 void comandoAyudaComando ( string primerComandoPorVerificar ) ;
-bool verificarTurno ( int id_jugador ) ;
-bool verificarJugador ( int id_jugador ) ;
+bool verificarTurno ( string id_jugador ) ;
+bool verificarJugador ( string id_jugador ) ;
 
 
 

@@ -40,4 +40,22 @@ bool Jugador::verificarTerritorioExistente ( string territorioPorBuscar ) {
 
 return false ;
 }
+int territoriosXJugador(string idJugador){
+	vector<Territorio>::iterator it;
+	vector<Jugador>::iterator itj;
+	int contador;
+	for(itj=jugadores.begin();itj!=jugadores.end();itj++)
+	{
+		if(itj->getNombre()==idJugador)
+		{
+			for(it=territorios.begin();it!=territorios.end();it++)
+			{
+				contador++;
+			}
+		}
+	}
+	return contador;
+}
+
+
 

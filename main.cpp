@@ -28,6 +28,7 @@ int main ( void ) {
     crearMapa() ;
 
     funcioon_Jugar() ;
+	
 
 
     cout << "\t\t - - - - - - - - -\n" << flush ;

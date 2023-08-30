@@ -357,4 +357,10 @@ void auxiliar_CrearMapa ( string principal , string vecino ) {
                 iteradorTerritorio_01 -> aniadirVecino ( *iteradorTerritorio_02 ) ;
 
 }
-
+void OyUUnidades(string idJugador){
+	for(int i=0;i<jugadores.size();i++){
+		for(int j=0;j<territorios.size();j++){
+			
+		}
+	}
+}
