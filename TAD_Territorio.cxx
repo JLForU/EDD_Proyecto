@@ -1,7 +1,7 @@
 
 // DIRECTIVAS DE PREPROCESAMIENTO.
 //// LLAMADO DE ARCHIVOS ADICIONALES.
-#include "main.hxx"
+#include "main.h"
 
 
 
@@ -50,6 +50,3 @@ void Territorio::aniadirVecino ( Territorio nuevoVecino ) {
 }
 
 
-bool verificarContinente(string idJugador){
-	return true;
-}

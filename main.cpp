@@ -1,6 +1,6 @@
 
 // DIRECTIVAS DE PREPROCESAMIENTO.
-#include "main.hxx"
+#include "main.h"
 
 
 

@@ -1,7 +1,7 @@
 
 // DIRECTIVAS DE PREPROCESAMIENTO.
 //// LLAMADO DE ARCHIVOS ADICIONALES.
-#include "main.hxx"
+#include "main.h"
 
 
 

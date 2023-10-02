@@ -1,1 +1,9 @@
-inicializar3ABCRojoVerdeAzul
+inicializar
+3
+A
+B
+C
+Rojo
+Verde
+Azul
+

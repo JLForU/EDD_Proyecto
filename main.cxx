@@ -1,6 +1,6 @@
 
 // DIRECTIVAS DE PREPROCESAMIENTO.
-#include "main.hxx"
+#include "main.h"
 
 
 
@@ -11,99 +11,99 @@ void llenarMazo ( void ) {
     Territorio t ;
 
     // Primer continente.
-    t = Territorio("Alaska","America del Norte",1) ;
+    t = Territorio("Alaska","America del Norte",11) ;
     territorios.push_back ( t )  ;  mazo.push_back ( Carta(t,Ejercito("Infanteria",1)) ) ;
-    t = Territorio("Alberta","America del Norte",2) ;
+    t = Territorio("Alberta","America del Norte",12) ;
     territorios.push_back ( t )  ;  mazo.push_back ( Carta(t,Ejercito("Caballeria",5)) ) ;
-    t = Territorio("America Central","America del Norte",3) ;
+    t = Territorio("America Central","America del Norte",13) ;
     territorios.push_back ( t )  ;  mazo.push_back ( Carta(t,Ejercito("Artilleria",10)) ) ;
-    t = Territorio("Estados Unidos Orientales","America del Norte",4) ;
+    t = Territorio("Estados Unidos Orientales","America del Norte",14) ;
     territorios.push_back ( t )  ;  mazo.push_back ( Carta(t,Ejercito("Infanteria",1)) ) ;
-    t = Territorio("Groenlandia","America del Norte",5) ;
+    t = Territorio("Groenlandia","America del Norte",15) ;
     territorios.push_back ( t )  ;  mazo.push_back ( Carta(t,Ejercito("Caballeria",5)) ) ;
-    t = Territorio("Territorio Noroccidental","America del Norte",6) ;
+    t = Territorio("Territorio Noroccidental","America del Norte",16) ;
     territorios.push_back ( t )  ;  mazo.push_back ( Carta(t,Ejercito("Artilleria",10)) ) ;
-    t = Territorio("Ontario","America del Norte",7) ;
+    t = Territorio("Ontario","America del Norte",17) ;
     territorios.push_back ( t )  ;  mazo.push_back ( Carta(t,Ejercito("Infanteria",1)) ) ;
-    t = Territorio("Quebec","America del Norte",8) ;
+    t = Territorio("Quebec","America del Norte",18) ;
     territorios.push_back ( t )  ;  mazo.push_back ( Carta(t,Ejercito("Caballeria",5)) ) ;
-    t = Territorio("Estados Unidos Occidentales","America del Norte",9) ;
+    t = Territorio("Estados Unidos Occidentales","America del Norte",19) ;
     territorios.push_back ( t )  ;  mazo.push_back ( Carta(t,Ejercito("Artilleria",10)) ) ;
 
     // Segundo continente.
-    t = Territorio("Argentina","America del Sur",1) ;
+    t = Territorio("Argentina","America del Sur",21) ;
     territorios.push_back ( t )  ;  mazo.push_back ( Carta(t,Ejercito("Infanteria",1)) ) ;
-    t = Territorio("Brasil","America del Sur",2) ;
+    t = Territorio("Brasil","America del Sur",22) ;
     territorios.push_back ( t )  ;  mazo.push_back ( Carta(t,Ejercito("Caballeria",5)) ) ;
-    t = Territorio("Peru","America del Sur",3) ;
+    t = Territorio("Peru","America del Sur",23) ;
     territorios.push_back ( t )  ;  mazo.push_back ( Carta(t,Ejercito("Artilleria",10)) ) ;
-    t = Territorio("Venezuela","America del Sur",4) ;
+    t = Territorio("Venezuela","America del Sur",24) ;
     territorios.push_back ( t )  ;  mazo.push_back ( Carta(t,Ejercito("Infanteria",1)) ) ;
 
     // Tercer continente.
-    t = Territorio("Gran Bretania","Europa",1) ;
+    t = Territorio("Gran Bretania","Europa",31) ;
     territorios.push_back ( t )  ;  mazo.push_back ( Carta(t,Ejercito("Caballeria",5)) ) ;
-    t = Territorio("Islandia","Europa",2) ;
+    t = Territorio("Islandia","Europa",32) ;
     territorios.push_back ( t )  ;  mazo.push_back ( Carta(t,Ejercito("Artilleria",10)) ) ;
-    t = Territorio("Europa del Norte","Europa",3) ;
+    t = Territorio("Europa del Norte","Europa",33) ;
     territorios.push_back ( t )  ;  mazo.push_back ( Carta(t,Ejercito("Infanteria",1)) ) ;
-    t = Territorio("Escandinavia","Europa",4) ;
+    t = Territorio("Escandinavia","Europa",34) ;
     territorios.push_back ( t )  ;  mazo.push_back ( Carta(t,Ejercito("Caballeria",5)) ) ;
-    t = Territorio("Europa del Sur","Europa",5) ;
+    t = Territorio("Europa del Sur","Europa",35) ;
     territorios.push_back ( t )  ;  mazo.push_back ( Carta(t,Ejercito("Artilleria",10)) ) ;
-    t = Territorio("Ucrania","Europa",6) ;
+    t = Territorio("Ucrania","Europa",36) ;
     territorios.push_back ( t )  ;  mazo.push_back ( Carta(t,Ejercito("Infanteria",1)) ) ;
-    t = Territorio("Europa Occidental","Europa",7) ;
+    t = Territorio("Europa Occidental","Europa",37) ;
     territorios.push_back ( t )  ;  mazo.push_back ( Carta(t,Ejercito("Caballeria",5)) ) ;
 
     // Cuarto continente.
-    t = Territorio("Congo","Africa",1) ;
+    t = Territorio("Congo","Africa",41) ;
     territorios.push_back ( t )  ;  mazo.push_back ( Carta(t,Ejercito("Artilleria",10)) ) ;
-    t = Territorio("Africa Oriental","Africa",2) ;
+    t = Territorio("Africa Oriental","Africa",42) ;
     territorios.push_back ( t )  ;  mazo.push_back ( Carta(t,Ejercito("Infanteria",1)) ) ;
-    t = Territorio("Egipto","Africa",3) ;
+    t = Territorio("Egipto","Africa",43) ;
     territorios.push_back ( t )  ;  mazo.push_back ( Carta(t,Ejercito("Caballeria",5)) ) ;
-    t = Territorio("Madagascar","Africa",4) ;
+    t = Territorio("Madagascar","Africa",44) ;
     territorios.push_back ( t )  ;  mazo.push_back ( Carta(t,Ejercito("Artilleria",10)) ) ;
-    t = Territorio("Africa del Norte","Africa",5) ;
+    t = Territorio("Africa del Norte","Africa",45) ;
     territorios.push_back ( t )  ;  mazo.push_back ( Carta(t,Ejercito("Infanteria",1)) ) ;
-    t = Territorio("Africa del Sur","Africa",6) ;
+    t = Territorio("Africa del Sur","Africa",46) ;
     territorios.push_back ( t )  ;  mazo.push_back ( Carta(t,Ejercito("Caballeria",5)) ) ;
 
     // Quinto continente.
-    t = Territorio("Afghanistan","Asia",1) ;
+    t = Territorio("Afghanistan","Asia",51) ;
     territorios.push_back ( t )  ;  mazo.push_back ( Carta(t,Ejercito("Artilleria",10)) ) ;
-    t = Territorio("China","Asia",2) ;
+    t = Territorio("China","Asia",52) ;
     territorios.push_back ( t )  ;  mazo.push_back ( Carta(t,Ejercito("Infanteria",1)) ) ;
-    t = Territorio("India","Asia",3) ;
+    t = Territorio("India","Asia",53) ;
     territorios.push_back ( t )  ;  mazo.push_back ( Carta(t,Ejercito("Caballeria",5)) ) ;
-    t = Territorio("Irkutsk","Asia",4) ;
+    t = Territorio("Irkutsk","Asia",54) ;
     territorios.push_back ( t )  ;  mazo.push_back ( Carta(t,Ejercito("Artilleria",10)) ) ;
-    t = Territorio("Japon","Asia",5) ;
+    t = Territorio("Japon","Asia",55) ;
     territorios.push_back ( t )  ;  mazo.push_back ( Carta(t,Ejercito("Infanteria",1)) ) ;
-    t = Territorio("Kamchatka","Asia",6) ;
+    t = Territorio("Kamchatka","Asia",56) ;
     territorios.push_back ( t )  ;  mazo.push_back ( Carta(t,Ejercito("Caballeria",5)) ) ;
-    t = Territorio("Medio Oriente","Asia",7) ;
+    t = Territorio("Medio Oriente","Asia",57) ;
     territorios.push_back ( t )  ;  mazo.push_back ( Carta(t,Ejercito("Artilleria",10)) ) ;
-    t = Territorio("Mongolia","Asia",8) ;
+    t = Territorio("Mongolia","Asia",58) ;
     territorios.push_back ( t )  ;  mazo.push_back ( Carta(t,Ejercito("Infanteria",1)) ) ;
-    t = Territorio("Siam","Asia",9) ;
+    t = Territorio("Siam","Asia",59) ;
     territorios.push_back ( t )  ;  mazo.push_back ( Carta(t,Ejercito("Caballeria",5)) ) ;
-    t = Territorio("Siberia","Asia",10) ;
+    t = Territorio("Siberia","Asia",510) ;
     territorios.push_back ( t )  ;  mazo.push_back ( Carta(t,Ejercito("Artilleria",10)) ) ;
-    t = Territorio("Ural","Asia",11) ;
+    t = Territorio("Ural","Asia",511) ;
     territorios.push_back ( t )  ;  mazo.push_back ( Carta(t,Ejercito("Infanteria",1)) ) ;
-    t = Territorio("Yakutsk","Asia",12) ;
+    t = Territorio("Yakutsk","Asia",512) ;
     territorios.push_back ( t )  ;  mazo.push_back ( Carta(t,Ejercito("Caballeria",5)) ) ;
 
     // Sexto continente.
-    t = Territorio("Australia Oriental","Oceania",1) ;
+    t = Territorio("Australia Oriental","Oceania",61) ;
     territorios.push_back ( t )  ;  mazo.push_back ( Carta(t,Ejercito("Artilleria",10)) ) ;
-    t = Territorio("Indonesia","Oceania",2) ;
+    t = Territorio("Indonesia","Oceania",62) ;
     territorios.push_back ( t )  ;  mazo.push_back ( Carta(t,Ejercito("Infanteria",1)) ) ;
-    t = Territorio("Nueva Guinea","Oceania",3) ;
+    t = Territorio("Nueva Guinea","Oceania",63) ;
     territorios.push_back ( t )  ;  mazo.push_back ( Carta(t,Ejercito("Caballeria",5)) ) ;
-    t = Territorio("Australia Occidental","Oceania",4) ;
+    t = Territorio("Australia Occidental","Oceania",64) ;
     territorios.push_back ( t )  ;  mazo.push_back ( Carta(t,Ejercito("Artilleria",10)) ) ;
 
 }
@@ -113,7 +113,7 @@ void funcioon_Jugar ( void ) {
 
     do {
 
-        cout << "\tIntroduce un comando: " <<endl<<"$ "<<flush ;
+        cout << "\tIntroduce un comando: " << endl << endl << "$ "<<flush ;
         getline (cin,comandoEntrada) ;
 
         cout << endl << endl ;
