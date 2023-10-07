@@ -22,6 +22,13 @@ string Jugador::getColor ( void ) {
 vector <Territorio> Jugador::getTerritorios ( void ) {
     return this -> territorios ;
 }
+
+vector <Ejercito> Jugador::getTropas ( void ) {
+    return this -> tropas ;
+}
+vector <Carta>Jugador:: getCartas ( void ) {
+	return this -> cartas ;
+}
 //// SETTERS ////
 void Jugador::setNombre ( string nuevoNombre ) {
     this -> nombre = nuevoNombre ;
@@ -33,6 +40,9 @@ void Jugador::setColor ( string nuevoColor ) {
 //// COMPORTAMIENTOS ////
 void Jugador::agregarTropa( Ejercito nuevaTropa){
 	this -> tropas.push_back(nuevaTropa);
+}
+void Jugador::agregarCarta( Carta nuevaCarta){
+	this -> cartas.push_back(nuevaCarta);
 }
 void Jugador::asignarTerritorio( Territorio nuevoTerritorio){
 	this -> territorios.push_back(nuevoTerritorio);

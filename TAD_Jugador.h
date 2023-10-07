@@ -36,11 +36,14 @@ class Jugador {
         string getNombre ( void ) ;
 		string getColor ( void ) ;
         vector <Territorio> getTerritorios ( void ) ;
+		vector <Ejercito> getTropas ( void ) ;
+		vector <Carta> getCartas ( void ) ;
         //// SETTERS ////
         void setNombre ( string nuevoNombre ) ;
 		void setColor ( string nuevoColor ) ;
 		
         //// COMPORTAMIENTOS ////
+		void agregarCarta(Carta nuevaCarta);
 		void agregarTropa(Ejercito nuevaTropa);
 		void asignarTerritorio(Territorio nuevoTerritorio);
         bool verificarTerritorioExistente ( int territorioPorBuscar ) ;

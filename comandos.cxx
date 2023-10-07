@@ -211,7 +211,8 @@ void comandoInicializar ( void ) {
         partidaInicializada = true ;	
 		nturno=0;		
         cout << "El juego se ha inicializado correctamente.\n\n" << flush ;
-		while(nJugadores<3||nJugadores>6){
+		bool cant=false;
+		while(!cant){
 			cout<<"Cuantos jugadores van a jugar (3/4/5/6): "<<flush;
 			cin>>nJugadores;
 			if(nJugadores<3||nJugadores>6){
@@ -219,6 +220,7 @@ void comandoInicializar ( void ) {
 			}
 			else
 			{
+				cant=true;
 				cout<<"Cantidad de jugadores valida.\n\n"<<flush;
 			}
 		}
@@ -231,6 +233,7 @@ void comandoInicializar ( void ) {
 			 jugadores.push_back(nuevoJugador);		
 			 
 		}
+		system("cls");
 		string color[nJugadores];
 		bool ci;
 		int tropas;
@@ -259,8 +262,9 @@ void comandoInicializar ( void ) {
 			ci=true;
 			while(ci){
 				
-				cout<<"Defina el color con el cual se quiere identificar el jugador "<<i+1<<"\n"<<"$ "<<flush;
+				cout<<"Defina el color con el cual se quiere identificar el jugador "<<jugadores[i].getNombre()<<"\n"<<"$ "<<flush;
 				cin>>color[i];
+				
 				bool colorRepetido=false;
 				transform(color[i].begin(), color[i].end(), color[i].begin(), ::tolower);
 				for(int j=0;j<i;j++)
@@ -279,32 +283,41 @@ void comandoInicializar ( void ) {
 					else
 					{
 						ci=false;
-						cout<<"Color "<<color[i]<<" guardado con exito para el usuario "<<i+1<<"\n\n"<<flush;
+						cout<<"Color "<<color[i]<<" guardado con exito para el usuario "<<jugadores[i].getNombre()<<"\n\n"<<flush;
 					}
 				}
 				
+				
 			}
 			Ejercito anadirEjercito=Ejercito("Infanteria",color[i],tropas);
+			jugadores[i].setColor(color[i]);
 			jugadores[i].agregarTropa(anadirEjercito);
 			
 		}
 
 		int turnoActual=0 ;
 
-		cout << endl << "\t" << "A continuacion cada jugador deberá escoger un territorio (ingresar nombre con la primera mayuscula);" << endl ;
+		
 
 		for ( int j=0 ; j < territorios.size() ; j++ ) {
-
+			cout << endl << "\t" << "A continuacion cada jugador deberá escoger un territorio (ingresar ID del territorio);" << endl ;
             for ( int i=0 ; i < territorios.size() ; i++ ) {
-
+				
+				bool ocupado=false;
 				if(i==0){
 					cout << endl << "\t" << territorios[i].getContinente() << endl ;
 					
 				}else if( territorios[i].getContinente() != territorios[i-1].getContinente()  ){
 					cout << endl << "\t" << territorios[i].getContinente() << endl ;
 				}
-
-                cout << "\t" << territorios[i].getID() << "\t" << territorios[i].getNombre() << endl ;
+				for(int k=0;k<nJugadores;k++){
+					if ( jugadores[k].verificarTerritorioExistente ( territorios[i].getID()) ) {
+						ocupado=true;		
+						break;
+					}
+				}
+				if(!ocupado)
+					cout << "\t" << territorios[i].getID() << "\t" << territorios[i].getNombre() << endl ;
 
 			}
 
@@ -363,19 +376,37 @@ void comandoInicializar ( void ) {
 
                     }
 
-					int cantr;
-					cout<<"Cuantas tropas desea asignar a este territorio?"<<endl;
-					cin>>cantr;
+
+					vector<Ejercito> cTropas;
+					vector<Ejercito>::iterator ite;
+					cTropas=jugadores[turnoActual].getTropas();
+
+					int cart=0;
+					int tcart=0;
+					int infan=35;
+					
+					cout<<"Cuenta con las siguientes tropas:"<<"  "<<endl;
+					
+					for(ite=cTropas.begin();ite!=cTropas.end();ite++){
+						infan=infan-1;
+						cout<<"\t"<<ite->getGrupo()<<": "<<infan<<endl;
+					}
+					
+					
 					string color;
 					color=jugadores[turnoActual].getColor();
-					Ejercito anadirEjercito=Ejercito("Infanteria",color,cantr);
-					jugadores[turnoActual].agregarTropa(anadirEjercito);
+					Ejercito anadirEjercito=Ejercito("Infanteria",color,1);
+					Territorio elegirTerritorio = Territorio ( territorioElegido , continente , id ) ;
+					
+					Carta nuevaCarta=Carta(elegirTerritorio,anadirEjercito);
+					jugadores[turnoActual].asignarTerritorio(elegirTerritorio) ;
+					jugadores[turnoActual].agregarCarta(nuevaCarta) ;
+					
 
 				}
 			}
 			
-			Territorio elegirTerritorio = Territorio ( territorioElegido , continente , id ) ;
-			jugadores[turnoActual].asignarTerritorio(elegirTerritorio) ;
+
 			turnoActual = (turnoActual+1) % jugadores.size() ;
 
 		}
