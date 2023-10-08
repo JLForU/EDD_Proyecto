@@ -1,7 +1,7 @@
 
 // DIRECTIVAS DE PREPROCESAMIENTO.
 //// LLAMADO DE ARCHIVOS ADICIONALES.
-#include "main.h"
+#include "TAD_Risk.h"
 
 
 
@@ -56,19 +56,23 @@ bool Jugador::verificarTerritorioExistente ( int territorioPorBuscar ) {
 
 return false ;
 }
-int Jugador::territoriosXJugador(string idJugador){
-	vector<Jugador>::iterator itj;
+
+int Jugador::territoriosXJugador ( vector <Jugador> jugadores , string idJugador ) {
+
 	int cant;
-	for(itj=jugadores.begin();itj!=jugadores.end();itj++)
-	{
-		if(itj->getNombre()==idJugador)
-		{
-			cant=itj->territorios.size();
+
+	vector<Jugador>::iterator itj ;
+	for ( itj=jugadores.begin() ; itj!=jugadores.end() ; itj++ ) {
+		if(itj->getNombre()==idJugador)	{
+			cant=itj->territorios.size() ;
 		}
 	}
-	return cant;
+
+return cant ;
 }
-int Jugador::verificarContinente(string idJugador){
+
+int Jugador::verificarContinente ( vector <Jugador> jugadores , string idJugador ) {
+
 	vector<Territorio>::iterator itt;
 	vector<Jugador>::iterator itj;
 	int can,cas,ce,caf,casi,co,cont;

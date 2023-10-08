@@ -1,22 +1,12 @@
 
 // DIRECTIVAS DE PREPROCESAMIENTO.
-#include "comandos.h"
-#include <cstring>
-#include <algorithm>
-
-
-//Variable global
-vector<Jugador> jugadores ;
-int nJugadores ;
-string id_jugador;
-string turno;
-int nturno;
+#include "TAD_Risk.h"
 
 
 
 /* IMPLEMENTACIÓN DE FUNCIONES PARA EL MANEJO DE COMANDOS. */
 
-string verificarComandoExistente ( string comandoEntrada ) {
+string Risk::verificarComandoExistente ( string comandoEntrada ) {
 
     string comando = "" ;
     string vector_comandos[16] = {
@@ -69,7 +59,7 @@ string verificarComandoExistente ( string comandoEntrada ) {
 }
 
 
-void accionarComandoCorrecto ( string primerComando ) {
+void Risk::accionarComandoCorrecto ( string primerComando ) {
     if ( primerComando == "inicializar" ) {
 
         comandoInicializar() ;
@@ -200,7 +190,7 @@ void accionarComandoCorrecto ( string primerComando ) {
 }
 
 
-void comandoInicializar ( void ) {
+void Risk::comandoInicializar ( void ) {
 
     if ( partidaInicializada ) {
     
@@ -416,7 +406,7 @@ void comandoInicializar ( void ) {
 }
 
 
-bool verificarJugador (string id_jugador ) {
+bool Risk::verificarJugador (string id_jugador ) {
 	for(int i=0;i<jugadores.size();i++)
 	{
 		if(id_jugador==jugadores[i].getNombre())
@@ -428,7 +418,7 @@ bool verificarJugador (string id_jugador ) {
 
 }
 
-bool verificarTurno ( string id_jugador ) {
+bool Risk::verificarTurno ( string id_jugador ) {
 	Jugador& jugadorActual=jugadores[nturno];
 	if(id_jugador==jugadorActual.getNombre())
 	{
@@ -442,7 +432,8 @@ bool verificarTurno ( string id_jugador ) {
 }
 
 
-void comandoTurno ( string id_jugador  ) {
+void Risk::comandoTurno ( string id_jugador  ) {
+
 	int cantTerritorios;
 	int cantContinentes;
 	int cantUnidades;
@@ -454,9 +445,9 @@ void comandoTurno ( string id_jugador  ) {
             if (verificarJugador(id_jugador)) {
                 if (verificarTurno(id_jugador)) {
 
-					cantTerritorios=jugadores[nturno].territoriosXJugador(id_jugador);
+					cantTerritorios = jugadores[nturno].territoriosXJugador ( jugadores , id_jugador ) ;
 					
-					cantContinentes=jugadores[nturno].verificarContinente(id_jugador);
+					cantContinentes = jugadores[nturno].verificarContinente ( jugadores , id_jugador ) ;
 					
 					cantUnidades=(cantTerritorios/3)+cantContinentes;
 					
@@ -491,7 +482,7 @@ void comandoTurno ( string id_jugador  ) {
 }
 
 
-void comandoSalir ( void ) {
+void Risk::comandoSalir ( void ) {
 
     cout << "Saliendo..." << endl ;
     
@@ -500,7 +491,7 @@ void comandoSalir ( void ) {
 }
 
 
-bool verificarArchivoComoArgumento ( void ) {
+bool Risk::verificarArchivoComoArgumento ( void ) {
 
     int contadorDeEspacios = 0 ;
     for ( char iterator_i : comandoEntrada ) {
@@ -568,49 +559,49 @@ bool verificarArchivoComoArgumento ( void ) {
 }
 
 
-void comandoGuardar ( void ) {
+void Risk::comandoGuardar ( void ) {
 
     cout << "\nLa partida ha sido guardada correctamente.\n\n" << flush ;
 
 }
 
 
-void comandoGuardarComprimido ( void ) {
+void Risk::comandoGuardarComprimido ( void ) {
 
     cout << "\nLa partida ha sido codificada y guardada correctamente.\n" << flush ;
 
 }
 
 
-void comandoInicializarArchivo ( void ) {
+void Risk::comandoInicializarArchivo ( void ) {
 
     cout << "\nLa partida ha sido inicializada correctamente.\n" << flush ;
 
 }
 
 
-bool verificarTerritorio ( void ) {
+bool Risk::verificarTerritorio ( void ) {
 
     return true ;
 
 }
 
 
-void comandoCostoConquista ( void ) {
+void Risk::comandoCostoConquista ( void ) {
 
     cout << "\nPara conquistarel territorio <territorio>, debe atacar desde <territorio_1>, pasando por los territorios <territorio_2>, <territorio_3>, ..., <territorio_m>. Debe conquistar <n> unidades de ejército. \n" << flush ;
 
 }
 
 
-void comandoConquista ( void ) {
+void Risk::comandoConquista ( void ) {
 
     cout << "\nLa conquista más barata es avanzar sobre el territorio <territorio_1> desde el territorio <territorio_2>. Para conquistar el territorio <territorio_1>, debe atacar desde <territorio_2>, pasando por los territorios <territorio_2>, <territorio_3>, ..., <territorio_m>. Debe conquistar <n> unidades de ejército. \n" << flush ;
 
 }
 
 
-void comandoAyuda ( void ) {
+void Risk::comandoAyuda ( void ) {
 
     cout<<"INICIALIZAR\t\t\t\t"<<"Realiza las operaciones necesarias para inicializar el juego, de acuerdo a las instrucciones entregadas."<<endl;
     cout<<"TURNO <id_jugador>\t\t\t"<<"Realiza las operaciones descritas dentro del turno de un jugador (obtener nuevas unidades, atacar y fortificar)."<<endl;
@@ -626,7 +617,7 @@ void comandoAyuda ( void ) {
 }
 
 
-void comandoAyudaComando ( string comandoAC ) {
+void Risk::comandoAyudaComando ( string comandoAC ) {
 
     if(comandoAC=="ayuda inicializar" || comandoAC=="AYUDA INICIALIZAR" || comandoAC=="ayuda INICIALIZAR"){
         cout<<"--INICIALIZAR"<<endl<<"\t"<<"Realiza las operaciones necesarias para inicializar el juego, de acuerdo a las instrucciones entregadas."<<endl;

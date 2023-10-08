@@ -1,15 +1,6 @@
 
 // DIRECTIVAS DE PREPROCESAMIENTO.
-#include "main.h"
-
-
-
-// SENTENCIAS GLOBALES GENERALES.
-string comandoEntrada ;
-bool partidaInicializada = false ;
-bool juegoFinalizado = false ;
-vector <Carta> mazo ;
-vector <Territorio> territorios ;
+#include "TAD_Risk.h"
 
 
 
@@ -23,11 +14,13 @@ int main ( void ) {
     cout << "\n\t\t - - - - - - - - - - -\n\n\n" << flush ;
 
 
-    llenarMazo() ;
+	Risk juego = Risk() ;
 
-    crearMapa() ;
+    juego.llenarMazo() ;
 
-    funcioon_Jugar() ;
+    juego.crearMapa() ;
+
+    juego.funcioon_Jugar() ;
 	
 
 

@@ -1,12 +1,20 @@
 
 // DIRECTIVAS DE PREPROCESAMIENTO.
-#include "main.h"
+#include "TAD_Risk.h"
 
 
 
 /* IMPLEMENTACIÓN DE FUNCIONES PARA EL MANEJO DEL JUEGO. */
 
-void llenarMazo ( void ) {
+Risk::Risk ( ) {
+
+	partidaInicializada = false ;
+	juegoFinalizado = false ;
+
+}
+
+
+void Risk::llenarMazo ( void ) {
 
     Territorio t ;
 
@@ -109,7 +117,7 @@ void llenarMazo ( void ) {
 }
 
 
-void funcioon_Jugar ( void ) {
+void Risk::funcioon_Jugar ( void ) {
 
     do {
 
@@ -129,7 +137,7 @@ void funcioon_Jugar ( void ) {
 }
 
 
-void crearMapa ( void ) {
+void Risk::crearMapa ( void ) {
 
     // América del Norte
 
@@ -346,7 +354,7 @@ void crearMapa ( void ) {
 }
 
 
-void auxiliar_CrearMapa ( string principal , string vecino ) {
+void Risk::auxiliar_CrearMapa ( string principal , string vecino ) {
 
     vector <Territorio>::iterator iteradorTerritorio_01 ;
     vector <Territorio>::iterator iteradorTerritorio_02 ;
@@ -357,10 +365,4 @@ void auxiliar_CrearMapa ( string principal , string vecino ) {
                 iteradorTerritorio_01 -> aniadirVecino ( *iteradorTerritorio_02 ) ;
 
 }
-void OyUUnidades(string idJugador){
-	for(int i=0;i<jugadores.size();i++){
-		for(int j=0;j<territorios.size();j++){
-			
-		}
-	}
-}
+

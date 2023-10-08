@@ -4,7 +4,7 @@
 #ifndef TAD_JUGADOR_H
 #define TAD_JUGADOR_H
 //// LLAMADO DE ARCHIVOS ADICIONALES.
-#include "main.h"
+#include "TAD_Risk.h"
 
 
 
@@ -43,12 +43,12 @@ class Jugador {
 		void setColor ( string nuevoColor ) ;
 		
         //// COMPORTAMIENTOS ////
-		void agregarCarta(Carta nuevaCarta);
-		void agregarTropa(Ejercito nuevaTropa);
-		void asignarTerritorio(Territorio nuevoTerritorio);
+		void agregarCarta ( Carta nuevaCarta ) ;
+		void agregarTropa ( Ejercito nuevaTropa ) ;
+		void asignarTerritorio ( Territorio nuevoTerritorio ) ;
         bool verificarTerritorioExistente ( int territorioPorBuscar ) ;
-		int territoriosXJugador(string idJugador);
-		int verificarContinente(string idJugador);
+		int territoriosXJugador ( vector <Jugador> jugadores , string idJugador ) ;
+		int verificarContinente ( vector <Jugador> jugadores , string idJugador ) ;
 
 } ;
 

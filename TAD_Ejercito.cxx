@@ -1,7 +1,7 @@
 
 // DIRECTIVAS DE PREPROCESAMIENTO.
 //// LLAMADO DE ARCHIVOS ADICIONALES.
-#include "main.h"
+#include "TAD_Risk.h"
 
 
 
