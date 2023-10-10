@@ -21,6 +21,8 @@
 #include "TAD_Territorio.h"
 #include "TAD_Ejercito.h"
 #include "TAD_Jugador.h"
+#include "ArbolHuff.h"
+#include "NodoHuff.h"
 //// INVOCACIÓN DE HERRAMIENTAS.
 using namespace std ;
 

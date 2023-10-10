@@ -14,7 +14,7 @@ int main ( void ) {
     cout << "\n\t\t - - - - - - - - - - -\n\n\n" << flush ;
 
 
-	Risk juego = Risk() ;
+    Risk juego = Risk() ;
 
     juego.llenarMazo() ;
 

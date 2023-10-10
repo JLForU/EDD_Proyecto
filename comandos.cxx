@@ -60,6 +60,7 @@ string Risk::verificarComandoExistente ( string comandoEntrada ) {
 
 
 void Risk::accionarComandoCorrecto ( string primerComando ) {
+
     if ( primerComando == "inicializar" ) {
 
         comandoInicializar() ;
@@ -85,7 +86,7 @@ void Risk::accionarComandoCorrecto ( string primerComando ) {
 
         comandoSalir() ;
 
-    } else if ( primerComando == "guardar" ) {
+    } else if (  primerComando.find("guardar ") == 0 ) {
 
         if ( partidaInicializada ) {
 
@@ -101,7 +102,7 @@ void Risk::accionarComandoCorrecto ( string primerComando ) {
 
         }
 
-    } else if ( primerComando == "guardar_comprimido" ) {
+    } else if ( primerComando.find("guardar_comprimido ") == 0 ) {
 
         if ( partidaInicializada ) {
 
@@ -859,6 +860,9 @@ bool Risk::verificarArchivoComoArgumento ( void ) {
         
         cout << "Nombre de archivo: " << nombreDeArchivo << endl ;
         
+        return true ;
+        
+        
         ifstream file(nombreDeArchivo) ;
         bool archivoExiste = file.good() ;
         
@@ -869,6 +873,8 @@ bool Risk::verificarArchivoComoArgumento ( void ) {
             cout << "El archivo no existe." << endl ;
             return false ;
         }
+        /*
+        */
     
     } else {
     
@@ -883,7 +889,83 @@ bool Risk::verificarArchivoComoArgumento ( void ) {
 
 
 void Risk::comandoGuardar ( void ) {
-
+	
+	int contadorDeEspacios = 0 ;
+	int contador_i;
+	char nombreDeArchivo[contador_i] ;
+	for ( char iterator_i : comandoEntrada ) {
+		if ( iterator_i == ' ' ) {
+			++contadorDeEspacios ;
+		}
+	}
+    
+    	if ( contadorDeEspacios == 1 ) {
+    
+		bool bandera = false ;
+		int contador_i = 0 ;
+		
+		for ( char iterator_i : comandoEntrada ) {
+		
+		    if ( bandera ) {
+		        ++contador_i ;
+		    }
+		    
+		    if ( iterator_i == ' ' ) {
+		        bandera = true ;
+		    }
+		
+		}
+		
+		bandera = false ;
+		contador_i = 0 ;
+		
+		for ( char iterator_i : comandoEntrada ) {
+		
+		    if ( bandera ) {
+		        nombreDeArchivo[contador_i] = iterator_i ;
+		        ++contador_i ;
+		    }
+		    
+		    if ( iterator_i == ' ' ) {
+		        bandera = true ;
+		    }
+		}
+        
+	} else {
+		return;
+	}
+	
+	string nombreA=nombreDeArchivo;
+    	nombreA=nombreA+".txt";
+	ofstream archivo;
+	archivo.open(nombreA,ios::out);
+	
+	if(archivo.fail()){
+		cout<<"No fue posible abrir el archivo";
+		return;
+	}
+	vector<Jugador>::iterator it;
+	archivo<<jugadores.size()<<" ";
+	for(it=jugadores.begin();it!=jugadores.end();it++){
+		vector<Carta> cartas;
+		vector<Territorio> terri;
+		vector<Carta>::iterator itt;
+		terri=it->getTerritorios();
+		cartas=it->getCartas();
+		Territorio terr;
+		Ejercito ej;
+		
+		archivo<<it->getNombre()<<" "<<it->getColor()<<" "<<terri.size()<<" ";
+		
+		for(itt=cartas.begin();itt!=cartas.end();itt++){
+			terr=itt->getTerritorio();
+			ej=itt->getEjercito();
+			archivo<<terr.getID()<<":"<<ej.getUnidades()<<"-";
+		}
+		archivo<<"::"<<cartas.size();
+	}
+	archivo.close();
+	
     cout << "\nLa partida ha sido guardada correctamente.\n\n" << flush ;
 
 }
@@ -891,7 +973,76 @@ void Risk::comandoGuardar ( void ) {
 
 void Risk::comandoGuardarComprimido ( void ) {
 
-    cout << "\nLa partida ha sido codificada y guardada correctamente.\n" << flush ;
+	int contadorDeEspacios = 0 ;
+	int contador_i;
+	char nombreDeArchivo[contador_i] ;
+	string texto;
+	int cod;
+	ArbolHuff arbol;
+	for ( char iterator_i : comandoEntrada ) {
+		if ( iterator_i == ' ' ) {
+			++contadorDeEspacios ;
+		}
+	}
+    
+    	if ( contadorDeEspacios == 1 ) {
+    
+		bool bandera = false ;
+		int contador_i = 0 ;
+
+		for ( char iterator_i : comandoEntrada ) {
+
+		    if ( bandera ) {
+			++contador_i ;
+		    }
+		    
+		    if ( iterator_i == ' ' ) {
+			bandera = true ;
+		    }
+
+		}
+
+		bandera = false ;
+		contador_i = 0 ;
+
+		for ( char iterator_i : comandoEntrada ) {
+
+		    if ( bandera ) {
+			nombreDeArchivo[contador_i] = iterator_i ;
+			++contador_i ;
+		    }
+		    
+		    if ( iterator_i == ' ' ) {
+			bandera = true ;
+		    }
+		}
+        
+	} else {
+		return;
+	}
+	
+	string nombreA=nombreDeArchivo;
+    	nombreA=nombreA+".txt";
+	ifstream archivo;
+	
+	archivo.open(nombreA,ios::out);
+	if(archivo.fail()){
+		cout<<"No fue posible abrir el archivo";
+		return;
+	}
+	while(!archivo.eof()){
+		getline(archivo,texto);
+	}
+	vector<string> respuesta;
+	vector<string>::iterator it;
+	respuesta=arbol.codificar(texto);
+	/*
+	for(it=respuesta.begin();it!=respuesta.end();it++){
+		cout<<"1"<<*it<<endl;
+	}
+	*/
+
+    	cout << "\nLa partida ha sido codificada y guardada correctamente.\n" << flush ;
 
 }
 
