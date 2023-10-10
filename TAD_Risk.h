@@ -10,7 +10,12 @@
 #include <cstring>
 #include <vector>
 #include <stdlib.h>
+////// MANEJO DE LETRAS.
 #include <algorithm>
+////// NÚMEROS ALEATORIOS.
+#include <cstdlib>
+#include <ctime>
+#include <iostream>
 //// LLAMADO DE ARCHIVOS ADICIONALES.
 #include "TAD_Carta.h"
 #include "TAD_Territorio.h"
@@ -57,6 +62,10 @@ class Risk {
 		void comandoInicializar ( ) ;
 		bool verificarJugador ( ) ;
 		void comandoTurno ( string id_jugador ) ;
+		void atacar ( int nTurno ) ;
+		void restarUnidades ( int territorioDesde , int territorioParaAtacar ) ;
+		int dadosAtacar ( int dados[] ) ;
+		void fortificar ( ) ;
 		void comandoSalir ( ) ;
 		bool verificarArchivoComoArgumento ( ) ;
 		void comandoGuardar ( ) ;

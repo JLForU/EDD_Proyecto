@@ -41,7 +41,6 @@ class Territorio {
 
         //// COMPORTAMIENTOS ////
         void aniadirVecino ( Territorio nuevoVecino ) ;
-		
 
 
 } ;
