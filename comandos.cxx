@@ -1161,8 +1161,9 @@ return resultado;
 void Risk::comandoInicializarArchivo ( void ) {
 
 	int contadorDeEspacios = 0 ;
-	int contador_i;
-	char nombreDeArchivo[contador_i] ;
+	int contador_i ;
+	char* nombreDeArchivo ;
+
 	for ( char iterator_i : comandoEntrada ) {
 		if ( iterator_i == ' ' ) {
 			++contadorDeEspacios ;
@@ -1186,6 +1187,7 @@ void Risk::comandoInicializarArchivo ( void ) {
 
         }
 
+		nombreDeArchivo = new char [contador_i] ;
         bandera = false ;
         contador_i = 0 ;
 
@@ -1294,8 +1296,10 @@ void Risk::comandoInicializarArchivo ( void ) {
 
     }
 
+	/*
     for ( int contador_i=0 ; contador_i < 3 ; contador_i++ )
         cout << jugadores[contador_i].getTropas().size() << endl ;
+	*/
 
     // Arreglos finales.
     partidaInicializada = true ;
