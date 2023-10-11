@@ -15,7 +15,7 @@
 ////// NÚMEROS ALEATORIOS.
 #include <cstdlib>
 #include <ctime>
-#include <iostream>
+////// EVALUAR SI UN CARACTER ES DÍGITO.
 //// LLAMADO DE ARCHIVOS ADICIONALES.
 #include "TAD_Carta.h"
 #include "TAD_Territorio.h"

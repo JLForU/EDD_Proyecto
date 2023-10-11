@@ -34,21 +34,22 @@ class Jugador {
 
         //// GETTERS ////
         string getNombre ( void ) ;
-		string getColor ( void ) ;
+        string getColor ( void ) ;
         vector <Territorio> getTerritorios ( void ) ;
-		vector <Ejercito> getTropas ( void ) ;
-		vector <Carta> getCartas ( void ) ;
+        vector <Ejercito> getTropas ( void ) ;
+        vector <Carta> getCartas ( void ) ;
         //// SETTERS ////
         void setNombre ( string nuevoNombre ) ;
-		void setColor ( string nuevoColor ) ;
-		
+        void setColor ( string nuevoColor ) ;
+
         //// COMPORTAMIENTOS ////
-		void agregarCarta ( Carta nuevaCarta ) ;
-		void agregarTropa ( Ejercito nuevaTropa ) ;
-		void asignarTerritorio ( Territorio nuevoTerritorio ) ;
+        void agregarCarta ( Carta nuevaCarta ) ;
+        void agregarTropa ( Ejercito nuevaTropa ) ;
+        void asignarTerritorio ( Territorio nuevoTerritorio ) ;
         bool verificarTerritorioExistente ( int territorioPorBuscar ) ;
-		int territoriosXJugador ( vector <Jugador> jugadores , string idJugador ) ;
-		int verificarContinente ( vector <Jugador> jugadores , string idJugador ) ;
+        int territoriosXJugador ( vector <Jugador> jugadores , string idJugador ) ;
+        int verificarContinente ( vector <Jugador> jugadores , string idJugador ) ;
+
 
 } ;
 

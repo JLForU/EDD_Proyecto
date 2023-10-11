@@ -22,6 +22,7 @@ ArbolHuff::ArbolHuff ( car& valor ) {
     nodo -> setDato ( valor ) ;
     this -> raiiz = nodo ;
 }
+
 //// DESTRUCTOR ////
 
 ArbolHuff::~ArbolHuff ( void ) {
@@ -53,26 +54,28 @@ bool ArbolHuff::esVacio ( void ) {
 }
 
 
-
-
 vector<NodoHuff*> ArbolHuff::insert ( vector<car> frecuencias ) {
+
 	car dato;
     vector<NodoHuff*> nodos;
 	NodoHuff* nodo = new NodoHuff();
 	vector<car>::iterator it;
+
 	for(it=frecuencias.begin();it!=frecuencias.end();it++){
+
 		if(it->caracter!=00){
+
 			NodoHuff* nodo= new NodoHuff();
 			dato.caracter=it->caracter;
 			dato.frecuencia=it->frecuencia;
 			nodo->setDato(dato);
 			nodos.push_back(nodo);
+
 		}
 		
 	}
 	
 	while (nodos.size() > 1) {
-        
 
         NodoHuff* nodoIzq = nodos[0];
         NodoHuff* nodoDer = nodos[1];
@@ -87,12 +90,16 @@ vector<NodoHuff*> ArbolHuff::insert ( vector<car> frecuencias ) {
         nodos.erase(nodos.begin());
         nodos.erase(nodos.begin());
         nodos.push_back(padre);
-    }
 
-	this->setRaiiz(nodos[0]);	
-	return nodos;
+	}
+
+	this->setRaiiz(nodos[0]);
+
+return nodos ;
 }
+
 vector<string> ArbolHuff::codificar(string texto){
+
 	car dato;
 	vector<car> res;
 	vector<string> codigo;
@@ -100,7 +107,6 @@ vector<string> ArbolHuff::codificar(string texto){
 	vector<NodoHuff*>::iterator it;
 	res=frecuencia(texto);
 	nodos=insert(res);
-	
 	
 	char *txt=new char[texto.length()+1];
 	strcpy(txt,texto.c_str());
@@ -112,13 +118,16 @@ vector<string> ArbolHuff::codificar(string texto){
 		decodificar(cod);
 		codigo.push_back(cod);
 	}
-	return codigo;
+
+return codigo ;
 }
 
-string ArbolHuff::buscar ( int c) {
+string ArbolHuff::buscar ( int c ) {
+
 	NodoHuff* nodo= new NodoHuff();
 	nodo=this->raiiz;
 	string cod;
+
 	while(nodo!=NULL){
 		
 		if(nodo->esHoja()){
@@ -133,13 +142,16 @@ string ArbolHuff::buscar ( int c) {
 			}
 		}
 	}
-	return cod;
-	
+
+return cod ;
 }
+
 bool ArbolHuff::buscar (int c, NodoHuff* actual) {
+
 	bool cod=false;
 	char j=c;
 	char k=actual->getDato().caracter;
+
 	if(actual->getDato().caracter==c){
 		cod=true;
 		return cod;
@@ -156,16 +168,18 @@ bool ArbolHuff::buscar (int c, NodoHuff* actual) {
 		}
 	}
 
-	return cod;
+return cod ;
 }
 
-void ArbolHuff::decodificar (string cod) {
-	char *prueba=new char[cod.length()];
-	strcpy(prueba,cod.c_str());
-	NodoHuff* p=new NodoHuff();
-	p=this->raiiz;
-	car v;
+void ArbolHuff::decodificar ( string cod ) {
+
+	char* prueba = new char[cod.length()] ;
+	strcpy ( prueba , cod.c_str() ) ;
+	NodoHuff* p = new NodoHuff() ;
+	p = this->raiiz ;
+	car v ;
 	char pp[4]={0,1,0,1};
+
 	for(int i=0;i<sizeof(pp);i++){
 		if(pp[i]==0){
 			p=p->getNodoIzq();
@@ -173,14 +187,15 @@ void ArbolHuff::decodificar (string cod) {
 			p=p->getNodoDer();
 		}
 	}
+
 	v=p->getDato();
 
-	
-    return;
+return ;
 }
 
 
-vector<car>  ArbolHuff::frecuencia ( string nombre ) {
+vector<car> ArbolHuff::frecuencia ( string nombre ) {
+
 	vector<car> res;
 	vector<car>::iterator it;
 	car letra;
@@ -208,6 +223,7 @@ vector<car>  ArbolHuff::frecuencia ( string nombre ) {
 			res.push_back(letra);
 		}
 	}
+
 	for(int i=0;i<res.size();i++){
 		for(it=res.begin();it!=res.end();it++){
 			if(it->frecuencia>(it+1)->frecuencia&&(it+1)->frecuencia!=0){
@@ -216,5 +232,6 @@ vector<car>  ArbolHuff::frecuencia ( string nombre ) {
 			}
 		}
 	}
-	return res;
+
+return res ;
 }

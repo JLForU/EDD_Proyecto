@@ -1,3 +1,4 @@
+executable.bat
 inicializar
 3
 A
@@ -48,6 +49,7 @@ Azul
 62
 63
 64
-turno A
-11
-12
+guardar archivo
+salir
+executable.bat
+inicializar archivo

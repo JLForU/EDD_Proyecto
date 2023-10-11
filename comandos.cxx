@@ -280,6 +280,7 @@ void Risk::comandoInicializar ( void ) {
 				
 				
 			}
+
 			Ejercito anadirEjercito=Ejercito("Infanteria",color[i],tropas);
 			jugadores[i].setColor(color[i]);
 			jugadores[i].agregarTropa(anadirEjercito);
@@ -698,7 +699,8 @@ int Risk::dadosAtacar ( int dados[] ) {
 		cout << "Segundo dado: " << flush , cin >> elec , cout << flush ;
 
 		for ( int contadorDados=0 ; contadorDados < 3 ; contadorDados++ )
-			if ( dados[contadorDados] == elec && elec != dadoFinal )
+		//  if ( dados[contadorDados] == elec && elec != dadoFinal )
+            if ( dados[contadorDados] == elec )
 				terminar = true ;
 
 	} while ( ! terminar ) ;
@@ -862,7 +864,7 @@ bool Risk::verificarArchivoComoArgumento ( void ) {
         
         return true ;
         
-        
+        /*
         ifstream file(nombreDeArchivo) ;
         bool archivoExiste = file.good() ;
         
@@ -873,7 +875,6 @@ bool Risk::verificarArchivoComoArgumento ( void ) {
             cout << "El archivo no existe." << endl ;
             return false ;
         }
-        /*
         */
     
     } else {
@@ -891,14 +892,15 @@ void Risk::comandoGuardar ( void ) {
 	
 	int contadorDeEspacios = 0 ;
 	int contador_i;
-	char nombreDeArchivo[contador_i] ;
+	char* nombreDeArchivo ;
+
 	for ( char iterator_i : comandoEntrada ) {
 		if ( iterator_i == ' ' ) {
 			++contadorDeEspacios ;
 		}
 	}
-    
-    	if ( contadorDeEspacios == 1 ) {
+
+	if ( contadorDeEspacios == 1 ) {
     
 		bool bandera = false ;
 		int contador_i = 0 ;
@@ -915,19 +917,20 @@ void Risk::comandoGuardar ( void ) {
 		
 		}
 		
+        nombreDeArchivo = new char [contador_i] ;
 		bandera = false ;
 		contador_i = 0 ;
 		
 		for ( char iterator_i : comandoEntrada ) {
 		
 		    if ( bandera ) {
-		        nombreDeArchivo[contador_i] = iterator_i ;
-		        ++contador_i ;
+		        nombreDeArchivo[contador_i++] = iterator_i ;
 		    }
 		    
 		    if ( iterator_i == ' ' ) {
 		        bandera = true ;
 		    }
+
 		}
         
 	} else {
@@ -935,7 +938,7 @@ void Risk::comandoGuardar ( void ) {
 	}
 	
 	string nombreA=nombreDeArchivo;
-    	nombreA=nombreA+".txt";
+	nombreA=nombreA+".txt";
 	ofstream archivo;
 	archivo.open(nombreA,ios::out);
 	
@@ -947,7 +950,7 @@ void Risk::comandoGuardar ( void ) {
 	vector<Jugador>::iterator it;
 	archivo<<jugadores.size()<<" ";
 
-	for(it=jugadores.begin();it!=jugadores.end();it++){
+	for ( it=jugadores.begin() ; it != jugadores.end() ; it++ ) {
 
 		vector<Carta> cartas;
 		vector<Territorio> terri;
@@ -962,10 +965,14 @@ void Risk::comandoGuardar ( void ) {
 		for(itt=cartas.begin();itt!=cartas.end();itt++){
 			terr=itt->getTerritorio();
 			ej=itt->getEjercito();
-			archivo<<terr.getID()<<":"<<ej.getUnidades()<<"-";
+            if ( itt+1 != cartas.end() )
+			    archivo<<terr.getID()<<":"<<ej.getUnidades()<<"-";
+            else
+                archivo<<terr.getID()<<":"<<ej.getUnidades() ;
 		}
 
-		archivo<<"::"<<cartas.size();
+        // archivo<<"::"<<cartas.size();
+		archivo<<" ";
 
 	}
 
@@ -1134,25 +1141,165 @@ void Risk::comandoGuardarComprimido ( void ) {
 
 
 vector<int> Risk::binarios(int decimal, int bits){
-  short binario[bits];
-  vector<int> resultado;
 
-  for(int i=0;i<bits;i++){
-    binario[i]=decimal%2;
-    decimal/=2;
-  }
+    short binario[bits];
+    vector<int> resultado;
 
-  for(int i=bits-1;i>=0;i--){
-    resultado.push_back(binario[i]);
-  }
+    for(int i=0;i<bits;i++){
+      binario[i]=decimal%2;
+      decimal/=2;
+    }
 
-  return resultado;
+    for(int i=bits-1;i>=0;i--){
+      resultado.push_back(binario[i]);
+    }
+
+return resultado;
 }
 
 
 void Risk::comandoInicializarArchivo ( void ) {
 
-    cout << "\nLa partida ha sido inicializada correctamente.\n" << flush ;
+	int contadorDeEspacios = 0 ;
+	int contador_i;
+	char nombreDeArchivo[contador_i] ;
+	for ( char iterator_i : comandoEntrada ) {
+		if ( iterator_i == ' ' ) {
+			++contadorDeEspacios ;
+		}
+	}
+
+	if ( contadorDeEspacios == 1 ) {
+
+        bool bandera = false ;
+        int contador_i = 0 ;
+
+        for ( char iterator_i : comandoEntrada ) {
+
+            if ( bandera ) {
+                ++contador_i ;
+            }
+
+            if ( iterator_i == ' ' ) {
+                bandera = true ;
+            }
+
+        }
+
+        bandera = false ;
+        contador_i = 0 ;
+
+        for ( char iterator_i : comandoEntrada ) {
+
+            if ( bandera ) {
+                nombreDeArchivo[contador_i] = iterator_i ;
+                ++contador_i ;
+            }
+
+            if ( iterator_i == ' ' ) {
+                bandera = true ;
+            }
+
+        }
+
+	} else {
+		return ;
+	}
+
+    // Crear nombre de archivo.
+	string nombreArchivoCompleto=nombreDeArchivo;
+    nombreArchivoCompleto += ".txt" ;
+
+    // Abrir el archivo para su lectura.
+    ifstream archivo ;
+    archivo.open ( nombreArchivoCompleto , ios::in ) ;
+
+    /*
+    if ( archivo.fail() )
+        cout << "ERROR!" << endl ;
+    else
+        cout << "GOOD!" << endl ;
+    */
+
+    // Declarar variable para leer archivo.
+    string contenidoArchivoEntrada ;
+
+    // Leer número de jugadores.
+    archivo >> contenidoArchivoEntrada ;
+    // Almacenar en memoría número de jugadores.
+    int nuumeroJugadores = atoi ( contenidoArchivoEntrada.c_str() ) ;
+    nJugadores = nuumeroJugadores ;
+
+    for ( int contador_i=0 ; contador_i < nJugadores ; contador_i++ ) {
+
+        // Almacenar ID de jugador.
+        archivo >> contenidoArchivoEntrada ;
+        Jugador nuevoJugador = Jugador ( contenidoArchivoEntrada ) ;
+        // Almacenar COLOR de jugador.
+        archivo >> contenidoArchivoEntrada ;
+        nuevoJugador.setColor ( contenidoArchivoEntrada ) ;
+        // Almacenar JUGADOR con ID y COLOR.
+        jugadores.push_back ( nuevoJugador ) ;
+
+        // Almacenar # DE TERRITORIOS por jugador.
+        archivo >> contenidoArchivoEntrada ;
+        int nuumeroTerritorios = atoi ( contenidoArchivoEntrada.c_str() ) ;
+        // ... dato sin uso ...
+
+        // Almacenar TERRITORIOS por jugador.
+        archivo >> contenidoArchivoEntrada ;
+        contenidoArchivoEntrada += '\0' ;
+        string nuumeros = "" ;
+        for ( char iterador_i : contenidoArchivoEntrada ) {
+
+            if ( isdigit(iterador_i) ) {
+
+                nuumeros += iterador_i ;
+
+            } else if ( iterador_i == ':' ) {
+
+                // Proceso para agregar un nuevo TERRITORIO.
+                int nuevoIdTerritorio = atoi ( nuumeros.c_str() ) ;
+                string nuevoNombreTerritorio ;
+                string nuevoContinenteTerritorio ;
+                for ( int contador_j=0 ; contador_j < territorios.size() ; contador_j++ )
+                    if ( territorios[contador_j].getID() == nuevoIdTerritorio ) {
+                        nuevoNombreTerritorio = territorios[contador_j].getNombre() ;
+                        nuevoContinenteTerritorio = territorios[contador_j].getContinente() ;
+                    }
+                Territorio nuevoTerritorio = Territorio ( nuevoNombreTerritorio , nuevoContinenteTerritorio , nuevoIdTerritorio ) ;
+                jugadores[jugadores.size()-1].asignarTerritorio ( nuevoTerritorio ) ;
+
+                nuumeros = "" ;
+
+            } else if ( iterador_i == '-' || iterador_i == '\0' ) {
+
+                // Proceso para agregar un nuevo EJERCITO.
+                int nuevoNuumeroTropas = atoi ( nuumeros.c_str() ) ;
+                Ejercito nuevaTropa = Ejercito ( "Infanteria" , nuevoNuumeroTropas ) ;
+                jugadores[jugadores.size()-1].agregarTropa ( nuevaTropa ) ;
+
+                // Proceso para agregar una nueva CARTA.
+                Territorio temp_Territorio ;
+                int uultimoTerritorio = jugadores[jugadores.size()-1].getTerritorios().size()-1 ;
+                temp_Territorio = jugadores[jugadores.size()-1].getTerritorios().at(uultimoTerritorio) ;
+                Carta nuevaCarta = Carta ( temp_Territorio , nuevaTropa ) ;
+                jugadores[jugadores.size()-1].agregarCarta ( nuevaCarta ) ;
+
+                nuumeros = "" ;
+
+            }
+
+        }
+
+    }
+
+    for ( int contador_i=0 ; contador_i < 3 ; contador_i++ )
+        cout << jugadores[contador_i].getTropas().size() << endl ;
+
+    // Arreglos finales.
+    partidaInicializada = true ;
+	cout << "\nLa partida ha sido inicializada correctamente.\n" << flush ;
 
 }
 
