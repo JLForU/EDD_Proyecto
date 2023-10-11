@@ -884,7 +884,6 @@ bool Risk::verificarArchivoComoArgumento ( void ) {
     
     }
 
-
 }
 
 
@@ -944,9 +943,12 @@ void Risk::comandoGuardar ( void ) {
 		cout<<"No fue posible abrir el archivo";
 		return;
 	}
+
 	vector<Jugador>::iterator it;
 	archivo<<jugadores.size()<<" ";
+
 	for(it=jugadores.begin();it!=jugadores.end();it++){
+
 		vector<Carta> cartas;
 		vector<Territorio> terri;
 		vector<Carta>::iterator itt;
@@ -962,8 +964,11 @@ void Risk::comandoGuardar ( void ) {
 			ej=itt->getEjercito();
 			archivo<<terr.getID()<<":"<<ej.getUnidades()<<"-";
 		}
+
 		archivo<<"::"<<cartas.size();
+
 	}
+
 	archivo.close();
 	
     cout << "\nLa partida ha sido guardada correctamente.\n\n" << flush ;
@@ -973,77 +978,175 @@ void Risk::comandoGuardar ( void ) {
 
 void Risk::comandoGuardarComprimido ( void ) {
 
-	int contadorDeEspacios = 0 ;
-	int contador_i;
-	char nombreDeArchivo[contador_i] ;
-	string texto;
-	int cod;
-	ArbolHuff arbol;
-	for ( char iterator_i : comandoEntrada ) {
-		if ( iterator_i == ' ' ) {
-			++contadorDeEspacios ;
-		}
-	}
-    
-    	if ( contadorDeEspacios == 1 ) {
-    
-		bool bandera = false ;
-		int contador_i = 0 ;
+    int contadorDeEspacios = 0 ;
+    int contador_i;
+    char nombreDeArchivo[contador_i] ;
+    string texto;
+    int cod;
+    ArbolHuff arbol;
 
-		for ( char iterator_i : comandoEntrada ) {
+    for ( char iterator_i : comandoEntrada ) {
+        if ( iterator_i == ' ' ) {
+            ++contadorDeEspacios ;
+        }
+    }
 
-		    if ( bandera ) {
-			++contador_i ;
-		    }
-		    
-		    if ( iterator_i == ' ' ) {
-			bandera = true ;
-		    }
+    if ( contadorDeEspacios == 1 ) {
 
-		}
+        bool bandera = false ;
+        int contador_i = 0 ;
 
-		bandera = false ;
-		contador_i = 0 ;
+        for ( char iterator_i : comandoEntrada ) {
 
-		for ( char iterator_i : comandoEntrada ) {
+            if ( bandera ) {
+                ++contador_i ;
+            }
 
-		    if ( bandera ) {
-			nombreDeArchivo[contador_i] = iterator_i ;
-			++contador_i ;
-		    }
-		    
-		    if ( iterator_i == ' ' ) {
-			bandera = true ;
-		    }
-		}
-        
-	} else {
-		return;
-	}
-	
-	string nombreA=nombreDeArchivo;
-    	nombreA=nombreA+".txt";
-	ifstream archivo;
-	
-	archivo.open(nombreA,ios::out);
-	if(archivo.fail()){
-		cout<<"No fue posible abrir el archivo";
-		return;
-	}
-	while(!archivo.eof()){
-		getline(archivo,texto);
-	}
-	vector<string> respuesta;
-	vector<string>::iterator it;
-	respuesta=arbol.codificar(texto);
-	/*
-	for(it=respuesta.begin();it!=respuesta.end();it++){
-		cout<<"1"<<*it<<endl;
-	}
-	*/
+            if ( iterator_i == ' ' ) {
+                bandera = true ;
+            }
 
-    	cout << "\nLa partida ha sido codificada y guardada correctamente.\n" << flush ;
+        }
 
+        bandera = false ;
+        contador_i = 0 ;
+
+        for ( char iterator_i : comandoEntrada ) {
+
+            if ( bandera ) {
+                nombreDeArchivo[contador_i] = iterator_i ;
+                ++contador_i ;
+            }
+
+            if ( iterator_i == ' ' ) {
+                bandera = true ;
+            }
+
+        }
+
+    } else {
+
+        return ;
+
+    }
+
+    string nombreA2=nombreDeArchivo;
+    nombreA2=nombreA2+".bin";
+    ofstream binario(nombreA2,ios::out);
+
+    vector<string> respuesta;
+    vector<string>::iterator itr;
+    vector<car> cantidad;
+    vector<car>::iterator itk;
+
+    if(binario.is_open()){
+
+        texto=jugadores.size()+" ";
+
+        vector<Jugador>::iterator it;
+        for(it=jugadores.begin();it!=jugadores.end();it++){
+
+            vector<Carta> cartas;
+            vector<Territorio> terri;
+            vector<Carta>::iterator itt;
+            terri=it->getTerritorios();
+            cartas=it->getCartas();
+            Territorio terr;
+            Ejercito ej;
+
+            texto=texto+it->getNombre()+" "+it->getColor()+" "+to_string(terri.size())+" ";
+
+            for(itt=cartas.begin();itt!=cartas.end();itt++){
+                terr=itt->getTerritorio();
+                ej=itt->getEjercito();
+                texto=texto+to_string(terr.getID())+":"+to_string(ej.getUnidades())+"-";
+            }
+
+            texto=texto+"::"+to_string(cartas.size());
+
+        }
+
+        ArbolHuff arbol;
+        vector<int> cantCarac;
+        vector<int>::iterator itp;
+        cantidad=arbol.frecuencia(texto);
+        cantCarac=binarios(cantidad.size(),16);
+
+        for(itp=cantCarac.begin();itp!=cantCarac.end();itp++){
+            binario<<*itp;
+        }
+
+        binario<<"#";
+
+        int ncaracteres=0;
+        vector<int> ncarac;
+        vector<int>::iterator itnca;
+        for(itk=cantidad.begin();itk!=cantidad.end();itk++){
+
+            int caracter=itk->caracter;
+            int frecuencia=itk->frecuencia;
+            vector<int> frec;
+            vector<int> carac;
+            vector<int>::iterator itca;
+            vector<int>::iterator itfre;
+            carac=binarios(caracter,8);
+            frec=binarios(frecuencia,64);
+
+            for(itca=carac.begin();itca!=carac.end();itca++){
+                binario<<*itca;
+            }
+
+            binario<<":";
+            for(itfre=frec.begin();itfre!=frec.end();itfre++){
+                binario<<*itfre;
+            }
+
+            binario<<"-";
+            ncaracteres++;
+
+        }
+
+        ncarac=binarios(ncaracteres,64);
+        binario<<"#";
+
+        for(itnca=ncarac.begin();itnca!=ncarac.end();itnca++){
+            binario<<*itnca;
+        }
+
+        binario<<endl;
+
+        respuesta=arbol.codificar(texto);
+
+        for(itr=respuesta.begin();itr!=respuesta.end();itr++){
+            binario<<*itr;
+        }
+
+    } else {
+
+        cout<<"No se pudo abrir el archivo"<<endl;
+        return;
+
+    }
+
+    cout << "\nLa partida ha sido codificada y guardada correctamente.\n" << flush ;
+
+}
+
+
+vector<int> Risk::binarios(int decimal, int bits){
+  short binario[bits];
+  vector<int> resultado;
+
+  for(int i=0;i<bits;i++){
+    binario[i]=decimal%2;
+    decimal/=2;
+  }
+
+  for(int i=bits-1;i>=0;i--){
+    resultado.push_back(binario[i]);
+  }
+
+  return resultado;
 }
 
 

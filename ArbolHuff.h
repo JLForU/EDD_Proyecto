@@ -11,7 +11,7 @@
 /* DEFINICIÓN DE CLASE 'ArbolHuff'. */
 
 
-class ArbolHuff {
+class ArbolHuff{
 
 
     private :
@@ -33,14 +33,15 @@ class ArbolHuff {
         bool setRaiiz ( NodoHuff* nuevaRaiiz ) ;
 
         //// COMPORTAMIENTOS ////
-		bool buscar ( int c , NodoHuff* actual ) ;
-		string buscar ( int c ) ;
+		bool buscar ( int c, NodoHuff* actual) ;
+		string buscar ( int c) ;
         bool esVacio ( void ) ;
-        vector<NodoHuff*> insert ( vector<car> frecuencias ) ;
-        vector<car>  frecuencia ( string nombre ) ;
-		vector<string> codificar ( string texto ) ;
-		void decodificar ( string cod ) ;
+        vector<NodoHuff*> insert ( vector<car> frecuencias) ;
+        vector<car>  frecuencia ( string nombre) ;
+		vector<string> codificar(string texto);
+		void decodificar (string cod) ;
         
+
 
 } ;
 

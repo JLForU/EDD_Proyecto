@@ -72,6 +72,7 @@ class Risk {
 		bool verificarArchivoComoArgumento ( ) ;
 		void comandoGuardar ( ) ;
 		void comandoGuardarComprimido ( ) ;
+		vector<int> binarios ( int decimal, int bits ) ;
 		void comandoInicializarArchivo ( ) ;
 		bool verificarTerritorio ( ) ;
 		void comandoCostoConquista ( ) ;
