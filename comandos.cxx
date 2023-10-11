@@ -1296,13 +1296,12 @@ void Risk::comandoInicializarArchivo ( void ) {
 
     }
 
-	/*
-    for ( int contador_i=0 ; contador_i < 3 ; contador_i++ )
-        cout << jugadores[contador_i].getTropas().size() << endl ;
-	*/
+	for ( int itera=0 ; itera < jugadores.size() ; itera++ )
+        	cout << "Jugador para turno: " << jugadores[itera].getNombre() << endl ;
 
-    // Arreglos finales.
-    partidaInicializada = true ;
+	// Arreglos finales.
+	nturno = 0 ;
+	partidaInicializada = true ;
 	cout << "\nLa partida ha sido inicializada correctamente.\n" << flush ;
 
 }
